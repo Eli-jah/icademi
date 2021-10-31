@@ -1,0 +1,89 @@
+server {
+    listen       80;
+    listen  [::]:80;
+    server_name  localhost.bak;
+
+    index index.php index.html index.htm default.php default.htm default.html;
+    root /usr/share/nginx/html;
+
+    #access_log  /var/log/nginx/host.access.log  main;
+
+    location ~ ^/(apidoc\.json|\.user.ini|\.htaccess|\.git|\.svn|\.project|LICENSE|README\.md|Dockerfile|docker-compose.yml)
+    {
+        return 404;
+    }
+
+    location ~ ^/(admin|api|captcha.html$) {
+        if (!-e $request_filename){
+                rewrite  ^(.*)$  /index.php?s=$1  last;   break;
+        }
+    }
+
+    location ~ ^/public/style/admin/plugins/ueditor/php/controller.php {
+        root            /usr/src/myapp;
+        fastcgi_pass    app:9000;
+        fastcgi_index   index.php;
+        fastcgi_param   SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+        include         fastcgi_params;
+    }
+
+    location ~ ^/public {
+        root /usr/share/nginx/html;
+    }
+
+    location / {
+        root /usr/share/nginx/html/public/dist;
+    }
+
+    location ~ ^/(js|css|img) {
+        root /usr/share/nginx/html/public/dist;
+    }
+
+    #error_page  404              /404.html;
+
+    # redirect server error pages to the static page /50x.html
+    #
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   /usr/share/nginx/html;
+    }
+
+    # proxy the PHP scripts to Apache listening on 127.0.0.1:80
+    #
+    #location ~ \.php$ {
+    #    proxy_pass   http://127.0.0.1;
+    #}
+
+    # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+    #
+    location ~ \.php$ {
+       root           /usr/src/myapp;
+       fastcgi_pass   app:9000;
+       fastcgi_index  index.php;
+       fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+       include        fastcgi_params;
+    }
+
+    location ~ .*\.(gif|jpg|jpeg|png|bmp|swf)$
+    {
+        expires      30d;
+        error_log /dev/null;
+        access_log /dev/null;
+    }
+    
+    location ~ .*\.(js|css)?$
+    {
+        expires      12h;
+        error_log /dev/null;
+        access_log /dev/null; 
+    }
+
+    # deny access to .htaccess files, if Apache's document root
+    # concurs with nginx's one
+    #
+    location ~ /\.ht {
+        deny  all;
+    }
+
+}
+
