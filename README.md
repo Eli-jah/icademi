@@ -143,4 +143,16 @@ Route::group(['middleware' => 'auth:user-api'], function(){
 9. php artisan passport:keys
 10. php artisan vendor:publish --tag=passport-components
 
+#### Carbon
+
+> If you plan to migrate from Carbon 1 to Carbon 2:
+
+./vendor/bin/upgrade-carbon
+```angular2html
+Do you want us to try the following upgrade:
+- nesbot/carbon: ^2.0.0
+- laravel/framework: ^5.8.0
+[Y/N] N
+```
+
 
