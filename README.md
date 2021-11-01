@@ -38,6 +38,20 @@ Migrated:  2014_10_12_100000_create_password_resets_table
 ```
 7. php artisan optimize
 
+### Crontab Service
+
+1. docker compose exec app /bin/bash
+2. apt install -y cron
+3. crontab -e
+```angular2html
+* * * * * php /var/www/html/artisan schedule:run >> /dev/null 2>&1
+```
+3. crontab -u root -l
+4. /etc/init.d/cron help
+```angular2html
+/etc/init.d/cron {start|stop|status|restart|reload|force-reload}
+```
+
 ### Composer Packages
 
 #### laravel/passport:~4.0

@@ -9,6 +9,9 @@ FROM php:7.4.25-fpm
 RUN apt update && apt list --upgradable && apt upgrade -y && apt autoremove -y
 RUN apt install -y gcc g++ make git wget vim zip net-tools build-essential
 
+# To install crond service
+RUN apt install -y cron
+
 # To install mysql client
 
 # RUN apt install -y mycli
