@@ -13,6 +13,13 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::post('login', 'API\PassportController@login');
+Route::post('register', 'API\PassportController@register');
+
+Route::group(['middleware' => 'auth:user-api'], function(){
+    Route::get('info', 'API\PassportController@info');
+});
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
