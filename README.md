@@ -18,9 +18,31 @@
 - docker compose stop
 - docker compose down
 
+### Initialization:
+
+1. composer install
+2. cp .env.example .env
+3. php artisan key:generate
+4. php artisan storage:link
+5. php artisan make:auth
+```angular2html
+Authentication scaffolding generated successfully.
+```
+6. php artisan migrate
+```angular2html
+Migration table created successfully.
+Migrating: 2014_10_12_000000_create_users_table
+Migrated:  2014_10_12_000000_create_users_table
+Migrating: 2014_10_12_100000_create_password_resets_table
+Migrated:  2014_10_12_100000_create_password_resets_table
+```
+7. php artisan optimize
+
 ### Composer Packages
 
 #### laravel/passport:~4.0
+
+> composer require lcobucci/jwt=3.3.3
 
 1. vim composer.json:
 ```angular2html
