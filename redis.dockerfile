@@ -6,6 +6,7 @@ FROM redis:latest
 # docker container run -it --rm redis:latest redis-cli -h icademi_redis
 # docker container run -v /myredis/conf:/usr/local/etc/redis --name icademi_redis redis redis-server /usr/local/etc/redis/redis.conf
 
+# To install basic tools
 # RUN apt update && apt list --upgradable && apt upgrade -y && apt autoremove -y
 # RUN apt install -y git wget vim net-tools build-essential
 

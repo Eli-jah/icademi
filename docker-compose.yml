@@ -2,8 +2,8 @@ version: "3"
 
 services: 
   app:
-    # image: php:7.4.25-fpm
-    # image: phpswoole/swoole:4.8.0-php7.4
+    # image: "php:7.4.25-fpm"
+    # image: "phpswoole/swoole:4.8.0-php7.4"
     build: 
       context: ./
       dockerfile: php.dockerfile
@@ -29,7 +29,7 @@ services:
       # - ./etc/profile/:/root/
       - ./:/var/www/html
   db:
-    # image: mysql:5.7.36
+    # image: "mysql:5.7.36"
     build: 
       context: ./
       dockerfile: mysql.dockerfile
@@ -46,7 +46,7 @@ services:
       # - ./etc/mysql/conf.d/my.cnf:/etc/alternatives/my.cnf
       - ./etc/mysql/conf.d/my.cnf:/etc/mysql/conf.d/my.cnf
   cache:
-    # image: redis:latest
+    # image: "redis:latest"
     build:
       context: ./
       dockerfile: redis.dockerfile
@@ -60,7 +60,7 @@ services:
     # volumes:
       # - ./etc/profile/:/root/
   web:
-    # image: nginx:latest
+    # image: "nginx:latest"
     build: 
       context: ./
       dockerfile: nginx.dockerfile
@@ -71,9 +71,9 @@ services:
     ports:
       - "8088:80"
     environment:
+      - TZ=Asia/Shanghai
       # - NGINX_HOST=localhost
       # - NGINX_PORT=80
-      - TZ=Asia/Shanghai
     # container_name: web
     volumes:
       - ./etc/profile/:/root/
@@ -81,5 +81,36 @@ services:
       - ./etc/nginx/conf.d:/etc/nginx/conf.d
       - ./etc/nginx/nginx.conf:/etc/nginx/nginx.conf
     # command: [nginx-debug, '-g', 'daemon off;']
+  node:
+    # iamge: "node:6"
+    # iamge: "node:lts"
+    # user: "node"
+    # working_dir: /home/node/app
+    working_dir: /var/www/html
+    build:
+      context: ./
+      dockerfile: node.dockerfile
+    expose:
+      - "8888"
+    ports:
+      - "8888"
+    links:
+      - app
+    depends_on:
+      - app
+    environment:
+      - TZ=Asia/Shanghai
+      - NODE_ENV=devlopment
+      # - NODE_ENV=production
+    # container_name: node
+    volumes:
+      - ./etc/profile/:/root/
+      # - ./etc/profile/:/home/node/
+      # - ./:/home/node/app
+      - ./:/var/www/html
+    # command: "npm run watch-poll"
+    # command: "apidoc -i app/Http/Controllers/Api/ -o public/apidoc/"
+    # command: "npm run watch -- --watch-poll"
+    # command: "npm start"
 
 

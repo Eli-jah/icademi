@@ -10,11 +10,12 @@
 - db: mysql.dockerfile
 - cache: redis.dockerfile
 - web: nginx.dockerfile
+- node: node.dockerfile
 
 #### Commands:
 
 - docker compose up -d
-- docker compose restart app|db|cache|web
+- docker compose restart {app|db|cache|web|node}
 - docker compose stop
 - docker compose down
 
@@ -51,6 +52,34 @@ Migrated:  2014_10_12_100000_create_password_resets_table
 ```angular2html
 /etc/init.d/cron {start|stop|status|restart|reload|force-reload}
 ```
+
+### Node Environment
+
+#### APIDOC
+> Inline Documentation for RESTful web APIs
+>
+> Reference: [https://apidocjs.com/#install](https://apidocjs.com/#install)
+
+1. Install
+```angular2html
+npm install apidoc -g
+```
+2. Run
+```angular2html
+apidoc -i src -o apidoc
+```
+Creates an apiDoc of all files within dir src, using the default template and put all output to apidoc directory.
+3. vim generate_apidoc.sh
+```angular2html
+#!/bin/bash
+apidoc -i app/Http/Controllers/Api/ -o public/apidoc/
+```
+4. chmod +x ./generate_apidoc.sh
+5. Generate or Refresh apidoc
+```angular2html
+./generate_apidoc.sh
+```
+6. Visit http://{host}:{port}/apidoc/index.html
 
 ### Composer Packages
 

@@ -6,6 +6,7 @@ FROM php:7.4.25-fpm
 # -p 9000:9000 -v "$PWD": /var/www/html -w  /var/www/html \
 # php:7.4.25-fpm /bin/bash
 
+# To install basic tools
 RUN apt update && apt list --upgradable && apt upgrade -y && apt autoremove -y
 RUN apt install -y gcc g++ make git wget vim zip net-tools build-essential
 

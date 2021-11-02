@@ -6,6 +6,7 @@ FROM mysql:5.7.36
 
 # docker container run -it --rm icademi_mysql mysql:5.7.36 -hdb -uicademi -p
 
+# To install basic tools
 # RUN apt update && apt list --upgradable && apt upgrade -y && apt autoremove -y
 # RUN apt install -y git wget vim net-tools build-essential
 

@@ -11,6 +11,7 @@ FROM nginx:latest
 # docker container run --rm -d -p 80:80 --read-only -v $(pwd)/nginx-cache:/var/cache/nginx -v $(pwd)/nginx-pid:/var/run nginx
 # docker container run --rm --name my-nginx -v /host/path/nginx.conf:/etc/nginx/nginx.conf:ro -d nginx nginx-debug -g 'daemon off;'
 
+# To install basic tools
 RUN apt update && apt list --upgradable && apt upgrade -y && apt autoremove -y
 RUN apt install -y git wget vim net-tools build-essential
 
