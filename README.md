@@ -4,7 +4,7 @@
 
 ### Docker Compose
 
-#### Structure:
+#### Structure
 
 - app: php.dockerfile
 - db: mysql.dockerfile
@@ -12,14 +12,14 @@
 - web: nginx.dockerfile
 - node: node.dockerfile
 
-#### Commands:
+#### Commands
 
 - docker compose up -d
 - docker compose restart {app|db|cache|web|node}
 - docker compose stop
 - docker compose down
 
-### Initialization:
+### Initialization
 
 1. composer install
 2. cp .env.example .env
@@ -38,6 +38,27 @@ Migrating: 2014_10_12_100000_create_password_resets_table
 Migrated:  2014_10_12_100000_create_password_resets_table
 ```
 7. php artisan optimize
+
+### Common Operations
+
+- php artisan make:seeder UserTableSeeder
+- php artisan migrate[:fresh|refresh] [--seed]
+- php artisan db:seed [--class=DatabaseSeeder]
+- php artisan db:seed --class=UserTableSeeder
+- php artisan passport:install
+- php artisan make:model Models/School -m
+- php artisan optimize
+
+### ORM
+
+| Model | Table | Description |
+| :--: | :--: | :--: |
+| User | users | Teacher |
+| School | schools | School |
+| SchoolUser | school_user | School-Teacher Relationship |
+| Student | students | Student |
+| StudentUser | student_user | Teacher-Student Relationship |
+| Invitation | invitations | Email Invitation Log |
 
 ### Crontab Service
 
@@ -183,5 +204,6 @@ Do you want us to try the following upgrade:
 - laravel/framework: ^5.8.0
 [Y/N] N
 ```
+
 
 

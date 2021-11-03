@@ -27,4 +27,25 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /* Eloquent Relationships */
+    public function founded_shools()
+    {
+        return $this->hasMany(School::class, 'user_id', 'id');
+    }
+
+    public function joined_schools()
+    {
+        return $this->belongsToMany(School::class);
+        // return $this->belongsToMany(School::class, 'school_user');
+        // return $this->belongsToMany(School::class, 'school_user', 'user_id', 'school_id', 'id', 'id');
+    }
+
+    public function fans_students()
+    {
+        // return $this->belongsToMany(Student::class);
+        // return $this->belongsToMany(Student::class, 'student_user');
+        // return $this->belongsToMany(Student::class, 'student_user', 'user_id', 'student_id', 'id', 'id');
+        return $this->belongsToMany(Student::class)->using(StudentUser::class);
+    }
 }
