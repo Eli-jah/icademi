@@ -15,7 +15,7 @@ class PassportController extends Controller
     const STATUS_UNAUTHORIZED = 401;
 
     /**
-     * @api {post} /api/register 1. User Register API
+     * @api {post} /api/passport/register 1. User Register API
      * @apiName 1. User Register API
      * @apiGroup Passport
      * @apiVersion 0.1.0
@@ -75,7 +75,7 @@ class PassportController extends Controller
     }
 
     /**
-     * @api {post} /api/login 2. General Login API
+     * @api {post} /api/passport/login 2. General Login API
      * @apiName 2. General Login API
      * @apiGroup Passport
      * @apiVersion 0.1.0
@@ -122,7 +122,7 @@ class PassportController extends Controller
     }
 
     /**
-     * @api {get} /api/info 3. User Info API
+     * @api {get} /api/passport/info 3. User Info API
      * @apiName 3. User Info API
      * @apiGroup Passport
      * @apiVersion 0.1.0
@@ -165,7 +165,7 @@ class PassportController extends Controller
     }
 
     /**
-     * @api {post} /api/reset_password 4. User Reset Password API
+     * @api {post} /api/passport/reset_password 4. User Reset Password API
      * @apiName 4. User Reset Password API
      * @apiGroup Passport
      * @apiVersion 0.1.0

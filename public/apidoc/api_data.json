@@ -1,7 +1,7 @@
 [
   {
     "type": "post",
-    "url": "/api/register",
+    "url": "/api/passport/register",
     "title": "1. User Register API",
     "name": "1._User_Register_API",
     "group": "Passport",
@@ -98,7 +98,7 @@
   },
   {
     "type": "post",
-    "url": "/api/login",
+    "url": "/api/passport/login",
     "title": "2. General Login API",
     "name": "2._General_Login_API",
     "group": "Passport",
@@ -181,7 +181,7 @@
   },
   {
     "type": "get",
-    "url": "/api/info",
+    "url": "/api/passport/info",
     "title": "3. User Info API",
     "name": "3._User_Info_API",
     "group": "Passport",
@@ -273,7 +273,7 @@
   },
   {
     "type": "post",
-    "url": "/api/reset_password",
+    "url": "/api/passport/reset_password",
     "title": "4. User Reset Password API",
     "name": "4._User_Reset_Password_API",
     "group": "Passport",

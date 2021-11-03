@@ -13,12 +13,12 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::post('register', 'API\PassportController@register');
-Route::post('login', 'API\PassportController@login');
-Route::post('reset_password', 'API\PassportController@resetPassword');
+Route::post('passport/register', 'API\PassportController@register');
+Route::post('passport/login', 'API\PassportController@login');
+Route::post('passport/reset_password', 'API\PassportController@resetPassword');
 
 Route::group(['middleware' => 'auth:user-api'], function(){
-    Route::get('info', 'API\PassportController@info');
+    Route::get('passport/info', 'API\PassportController@info');
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
