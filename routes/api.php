@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 
 Route::post('register', 'API\PassportController@register');
 Route::post('login', 'API\PassportController@login');
+Route::post('reset_password', 'API\PassportController@resetPassword');
 
 Route::group(['middleware' => 'auth:user-api'], function(){
     Route::get('info', 'API\PassportController@info');
