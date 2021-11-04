@@ -47,6 +47,9 @@ Migrated:  2014_10_12_100000_create_password_resets_table
 - php artisan db:seed --class=UserTableSeeder
 - php artisan passport:install
 - php artisan make:model Models/School -m
+- php artisan make:migration create_student_password_resets_table --create=student_password_resets
+- php artisan make:migration modify_student_password_resets_table --table=student_password_resets
+- php artisan make:controller Api/SchoolsController
 - php artisan optimize
 
 ### ORM

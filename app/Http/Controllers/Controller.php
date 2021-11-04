@@ -10,4 +10,8 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    const STATUS_SUCCESS = 200; // OK.
+    const STATUS_UNAUTHORIZED = 401; // Unauthenticated.
+    const STATUS_FORBIDDEN = 403; // Forbidden.
 }

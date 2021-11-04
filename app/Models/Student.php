@@ -3,12 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 
-class Student extends Model
+class Student extends Authenticatable
 {
     use HasApiTokens, Notifiable;
+
+    public $type = 'student';
 
     /**
      * The attributes that are mass assignable.
@@ -30,6 +33,21 @@ class Student extends Model
     protected $hidden = [
         'password',
     ];
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'type',
+    ];
+
+    /* Accessors */
+    public function getTypeAttribute()
+    {
+        return $this->type;
+    }
 
     /* Eloquent Relationships */
     public function school()
