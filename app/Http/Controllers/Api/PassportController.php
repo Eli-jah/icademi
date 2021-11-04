@@ -69,6 +69,7 @@ class PassportController extends Controller
                 'email' => $input['email'],
                 'password' => User::PASSWORD,
             ])
+            ->whereNotNull('random_code')
             ->first()) {
             $user->update($input);
         } else if ($user = User::query()

@@ -25,6 +25,8 @@ Route::group(['middleware' => 'auth:user-api'], function () {
     Route::get('teacher/received_invitations', 'API\UsersController@receivedInvitations');
     Route::post('invitation/send', 'API\InvitationsController@send');
     Route::post('invitation/accept', 'API\InvitationsController@accept');
+    Route::get('school/all_students', 'API\SchoolsController@allStudents');
+    Route::get('school/fans_students', 'API\SchoolsController@fansStudents');
 });
 
 Route::group(['middleware' => 'auth:student-api'], function () {
