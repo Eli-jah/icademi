@@ -208,5 +208,17 @@ Do you want us to try the following upgrade:
 [Y/N] N
 ```
 
+#### Laravel Admin
+
+> Reference:
+>
+> [https://www.laravel-admin.org/docs/en/](https://www.laravel-admin.org/docs/en/)
+> 
+> [https://www.laravel-admin.org/docs/zh/1.x](https://www.laravel-admin.org/docs/zh/1.x)
+
+1. composer require encore/laravel-admin:1.*
+2. php artisan vendor:publish --provider="Encore\Admin\AdminServiceProvider"
+3. php artisan admin:install
+4. visit URL `/admin`, and use username `admin` and password `admin` to login.
 
 
