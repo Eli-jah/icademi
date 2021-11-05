@@ -298,6 +298,8 @@ class PassportController extends Controller
                 ]);
         }
 
+        $request->session()->invalidate();
+
         return response()->json([
             'message' => 'OK.',
         ], self::STATUS_SUCCESS);

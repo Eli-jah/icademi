@@ -63,6 +63,18 @@ class SchoolPolicy
     }
 
     /**
+     * Determine whether the school can run.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\School  $school
+     * @return mixed
+     */
+    public function run(User $user, School $school)
+    {
+        return $school->is_approved;
+    }
+
+    /**
      * Determine whether the user can work in the school.
      *
      * @param  \App\Models\User  $user
@@ -104,5 +116,4 @@ class SchoolPolicy
     {
         return $student->school_id == $school->id;
     }
-
 }

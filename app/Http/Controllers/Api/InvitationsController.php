@@ -66,6 +66,7 @@ class InvitationsController extends Controller
         }
 
         $school = School::query()->find(request('school_id'));
+        $this->authorize('run', $school);
         $user = Auth::guard('user-api')->user();
         $this->authorize('manage', $school);
         $input = $request->all();
@@ -80,9 +81,13 @@ class InvitationsController extends Controller
         Invitation::query()
             ->create($input);
 
-        if (!$teacher = User::query()
+        if ($teacher = User::query()
             ->where('email', $input['email'])
             ->first()) {
+            $teacher->update([
+                'random_code' => $input['random_code'],
+            ]);
+        } else {
             $teacher = User::query()
                 ->create([
                     'name' => $input['recipient_name'],

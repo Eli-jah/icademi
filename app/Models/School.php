@@ -28,6 +28,27 @@ class School extends Model
         'rejected_at',
     ];
 
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'is_approved',
+        'is_rejected',
+    ];
+
+    /* Accessors */
+    public function getIsApprovedAttribute()
+    {
+        return !empty($this->attributes['approved_at']);
+    }
+
+    public function getIsRejectedAttribute()
+    {
+        return !empty($this->attributes['rejected_at']);
+    }
+
     /* Eloquent Relationships */
     public function founder()
     {
