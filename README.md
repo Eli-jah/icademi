@@ -46,6 +46,7 @@ Migrating: 2014_10_12_100000_create_password_resets_table
 Migrated:  2014_10_12_100000_create_password_resets_table
 ```
 7. php artisan optimize
+8. composer {list | dumpautoload | dump-autoload}
 
 ### Common Operations
 
@@ -229,4 +230,23 @@ Do you want us to try the following upgrade:
 3. php artisan admin:install
 4. visit URL `/admin`, and use username `admin` and password `admin` to login.
 
+#### Doctrine/DBAL
+
+> composer require doctrine/dbal:2.*
+
+Scenario:
+```angular2html
+In MySqlConnection.php line 65:
+                                                          
+  Class 'Doctrine\DBAL\Driver\PDOMySql\Driver' not found
+```
+
+Solution: [Version: 2.*]
+```angular2html
+# Right:
+composer require doctrine/dbal:2.*
+
+# Wrong:
+composer require doctrine/dbal
+```
 
