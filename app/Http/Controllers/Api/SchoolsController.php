@@ -341,11 +341,9 @@ class SchoolsController extends Controller
         $this->authorize('work', $school);
 
         return response()->json([
-            'data' => $user->fans_students
-                ->filter(function ($fans_student, $key) use ($school) {
-                    return $fans_student->school_id == $school->id;
-                })
-                ->all(),
+            'data' => $user->fans_students()
+                ->where('school_id', $school->id)
+                ->get(),
         ], self::STATUS_SUCCESS);
     }
 }

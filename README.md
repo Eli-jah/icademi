@@ -2,6 +2,14 @@
 
 > icademi: A Smart Academy System by Elijah Wang.
 
+### Website Entrance
+
+- web: http://localhost:8088/
+- apidoc: http://localhost:8088/apidoc/index.html
+- admin: http://localhost:8088/admin
+  - username: admin
+  - password: admin
+
 ### Docker Compose
 
 #### Structure
@@ -92,7 +100,7 @@ npm install apidoc -g
 ```angular2html
 apidoc -i src -o apidoc
 ```
-Creates an apiDoc of all files within dir src, using the default template and put all output to apidoc directory.
+> Creates an apiDoc of all files within dir src, using the default template and put all output to apidoc directory.
 3. vim generate_apidoc.sh
 ```angular2html
 #!/bin/bash
