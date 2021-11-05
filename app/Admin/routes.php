@@ -1,8 +1,5 @@
 <?php
 
-use App\Admin\Controllers\SchoolsController;
-use App\Admin\Controllers\StudentsController;
-use App\Admin\Controllers\TeachersController;
 use Illuminate\Routing\Router;
 
 Admin::routes();
