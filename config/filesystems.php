@@ -43,6 +43,14 @@ return [
 
     'disks' => [
 
+        // for Laravel Admin
+        'admin' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/admin'),
+            'url' => env('APP_URL').'/storage/admin',
+            'visibility' => 'public',
+        ],
+
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),

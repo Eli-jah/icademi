@@ -45,8 +45,11 @@ Migrated:  2014_10_12_000000_create_users_table
 Migrating: 2014_10_12_100000_create_password_resets_table
 Migrated:  2014_10_12_100000_create_password_resets_table
 ```
-7. php artisan optimize
-8. composer {list | dumpautoload | dump-autoload}
+7. php artisan vendor:publish --provider="Encore\Admin\AdminServiceProvider"
+8. php artisan admin:install
+9. php artisan db:seed
+10. php artisan optimize
+11. composer {list | dumpautoload | dump-autoload}
 
 ### Common Operations
 
@@ -229,6 +232,17 @@ Do you want us to try the following upgrade:
 2. php artisan vendor:publish --provider="Encore\Admin\AdminServiceProvider"
 3. php artisan admin:install
 4. visit URL `/admin`, and use username `admin` and password `admin` to login.
+5. php artisan admin:make TeachersController --model=App\\Admin\\Models\\Teacher
+```angular2html
+App\Admin\Controllers\TeachersController created successfully.
+Add the following route to app/Admin/routes.php:
+    $router->resource('teachers', TeachersController::class);
+```
+6. php artisan admin:export-seed --users
+```angular2html
+Admin tables seed file was created: /database/seeders/AdminTablesSeeder.php
+Use: php artisan db:seed --class=AdminTablesSeeder
+```
 
 #### Doctrine/DBAL
 
