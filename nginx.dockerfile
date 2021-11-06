@@ -20,7 +20,9 @@ RUN apt install -y git wget vim net-tools build-essential
 COPY ./etc/profile/. /root/
 COPY ./etc/nginx/nginx.conf /etc/nginx/nginx.conf
 COPY ./etc/nginx/conf.d /etc/nginx/conf.d
-COPY . /usr/share/nginx/html
+# COPY . /usr/share/nginx/html
+COPY . /var/www/html
+WORKDIR /var/www/html
 
 ENV TZ=Asia/Shanghai
 # ENV NGINX_HOST=localhost

@@ -4,7 +4,8 @@ server {
     server_name  localhost.bak;
 
     index index.php index.html index.htm default.php default.htm default.html;
-    root /usr/share/nginx/html;
+    # root /usr/share/nginx/html;
+    root /var/www/html;
 
     #access_log  /var/log/nginx/host.access.log  main;
 
@@ -28,15 +29,18 @@ server {
     }
 
     location ~ ^/public {
-        root /usr/share/nginx/html;
+        # root /usr/share/nginx/html;
+        root /var/www/html;
     }
 
     location / {
-        root /usr/share/nginx/html/public/dist;
+        # root /usr/share/nginx/html/public/dist;
+        root /var/www/html/public/dist;
     }
 
     location ~ ^/(js|css|img) {
-        root /usr/share/nginx/html/public/dist;
+        # root /usr/share/nginx/html/public/dist;
+        root /var/www/html/public/dist;
     }
 
     #error_page  404              /404.html;
@@ -45,7 +49,8 @@ server {
     #
     error_page   500 502 503 504  /50x.html;
     location = /50x.html {
-        root   /usr/share/nginx/html;
+        # root   /usr/share/nginx/html;
+        root   /var/www/html;
     }
 
     # proxy the PHP scripts to Apache listening on 127.0.0.1:80
