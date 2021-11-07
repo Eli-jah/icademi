@@ -137,20 +137,26 @@ class AdminTablesSeeder extends Seeder
                 [
                     "name" => "Teacher Management",
                     "slug" => "auth.teacher",
-                    "http_method" => "GET,POST",
+                    "http_method" => "GET,POST,PUT",
                     "http_path" => "/teachers\r\n/teachers/*",
                 ],
                 [
                     "name" => "School Management",
                     "slug" => "auth.school",
                     "http_method" => "",
-                    "http_path" => "/schools",
+                    "http_path" => "/schools\r\n/schools/*",
                 ],
                 [
                     "name" => "Student Management",
                     "slug" => "auth.student",
                     "http_method" => "",
-                    "http_path" => "/students",
+                    "http_path" => "/students\r\n/students/*",
+                ],
+                [
+                    "name" => "Invitation Management",
+                    "slug" => "auth.invitation",
+                    "http_method" => "",
+                    "http_path" => "/invitations\r\n/invitations/*",
                 ],
             ]
         );
@@ -234,6 +240,10 @@ class AdminTablesSeeder extends Seeder
                 [
                     "role_id" => 2,
                     "permission_id" => 8,
+                ],
+                [
+                    "role_id" => 2,
+                    "permission_id" => 9,
                 ],
             ]
         );

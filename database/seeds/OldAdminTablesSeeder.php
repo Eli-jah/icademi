@@ -76,20 +76,26 @@ class OldAdminTablesSeeder extends Seeder
             [
                 'name' => 'Teacher Management',
                 'slug' => 'auth.teacher',
-                'http_method' => 'GET,POST',
+                'http_method' => 'GET,POST,PUT',
                 'http_path' => "/teachers\r\n/teachers/*",
             ],
             [
                 'name' => 'School Management',
                 'slug' => 'auth.school',
                 'http_method' => '',
-                'http_path' => "/schools",
+                'http_path' => "/schools\r\n/schools/*",
             ],
             [
                 'name' => 'Student Management',
                 'slug' => 'auth.student',
                 'http_method' => '',
-                'http_path' => "/students",
+                'http_path' => "/students\r\n/students/*",
+            ],
+            [
+                "name" => "Invitation Management",
+                "slug" => "auth.invitation",
+                "http_method" => "",
+                "http_path" => "/invitations\r\n/invitations/*",
             ],
         ]);
 
@@ -100,6 +106,7 @@ class OldAdminTablesSeeder extends Seeder
         Role::query()->find(2)->permissions()->save(Permission::query()->find(6));
         Role::query()->find(2)->permissions()->save(Permission::query()->find(7));
         Role::query()->find(2)->permissions()->save(Permission::query()->find(8));
+        Role::query()->find(2)->permissions()->save(Permission::query()->find(9));
 
         // add default menus.
         Menu::query()->truncate();

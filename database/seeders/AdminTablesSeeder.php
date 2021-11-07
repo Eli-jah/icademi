@@ -1,9 +1,9 @@
 <?php
 
-namespace Database\Seeders;
+// namespace Database\Seeders;
 
-use DB;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class AdminTablesSeeder extends Seeder
 {
@@ -24,7 +24,7 @@ class AdminTablesSeeder extends Seeder
                     "title" => "Dashboard",
                     "icon" => "fa-bar-chart",
                     "uri" => "/",
-                    "permission" => NULL
+                    "permission" => NULL,
                 ],
                 [
                     "parent_id" => 0,
@@ -32,7 +32,7 @@ class AdminTablesSeeder extends Seeder
                     "title" => "Admin",
                     "icon" => "fa-tasks",
                     "uri" => "",
-                    "permission" => NULL
+                    "permission" => NULL,
                 ],
                 [
                     "parent_id" => 2,
@@ -40,7 +40,7 @@ class AdminTablesSeeder extends Seeder
                     "title" => "Users",
                     "icon" => "fa-users",
                     "uri" => "auth/users",
-                    "permission" => NULL
+                    "permission" => NULL,
                 ],
                 [
                     "parent_id" => 2,
@@ -48,7 +48,7 @@ class AdminTablesSeeder extends Seeder
                     "title" => "Roles",
                     "icon" => "fa-user",
                     "uri" => "auth/roles",
-                    "permission" => NULL
+                    "permission" => NULL,
                 ],
                 [
                     "parent_id" => 2,
@@ -56,7 +56,7 @@ class AdminTablesSeeder extends Seeder
                     "title" => "Permission",
                     "icon" => "fa-ban",
                     "uri" => "auth/permissions",
-                    "permission" => NULL
+                    "permission" => NULL,
                 ],
                 [
                     "parent_id" => 2,
@@ -64,7 +64,7 @@ class AdminTablesSeeder extends Seeder
                     "title" => "Menu",
                     "icon" => "fa-bars",
                     "uri" => "auth/menu",
-                    "permission" => NULL
+                    "permission" => NULL,
                 ],
                 [
                     "parent_id" => 2,
@@ -72,7 +72,7 @@ class AdminTablesSeeder extends Seeder
                     "title" => "Operation log",
                     "icon" => "fa-history",
                     "uri" => "auth/logs",
-                    "permission" => NULL
+                    "permission" => NULL,
                 ],
                 [
                     "parent_id" => 0,
@@ -80,7 +80,7 @@ class AdminTablesSeeder extends Seeder
                     "title" => "Teacher Management",
                     "icon" => "fa-user-secret",
                     "uri" => "/teachers",
-                    "permission" => "auth.teacher"
+                    "permission" => "auth.teacher",
                 ],
                 [
                     "parent_id" => 0,
@@ -88,7 +88,7 @@ class AdminTablesSeeder extends Seeder
                     "title" => "School Management",
                     "icon" => "fa-bank",
                     "uri" => "/schools",
-                    "permission" => "auth.school"
+                    "permission" => "auth.school",
                 ],
                 [
                     "parent_id" => 0,
@@ -96,8 +96,8 @@ class AdminTablesSeeder extends Seeder
                     "title" => "Student Management",
                     "icon" => "fa-users",
                     "uri" => "/students",
-                    "permission" => "auth.student"
-                ]
+                    "permission" => "auth.student",
+                ],
             ]
         );
 
@@ -108,50 +108,56 @@ class AdminTablesSeeder extends Seeder
                     "name" => "All permission",
                     "slug" => "*",
                     "http_method" => "",
-                    "http_path" => "*"
+                    "http_path" => "*",
                 ],
                 [
                     "name" => "Dashboard",
                     "slug" => "dashboard",
                     "http_method" => "GET",
-                    "http_path" => "/"
+                    "http_path" => "/",
                 ],
                 [
                     "name" => "Login",
                     "slug" => "auth.login",
                     "http_method" => "",
-                    "http_path" => "/auth/login\r\n/auth/logout"
+                    "http_path" => "/auth/login\r\n/auth/logout",
                 ],
                 [
                     "name" => "User setting",
                     "slug" => "auth.setting",
                     "http_method" => "GET,PUT",
-                    "http_path" => "/auth/setting"
+                    "http_path" => "/auth/setting",
                 ],
                 [
                     "name" => "Auth management",
                     "slug" => "auth.management",
                     "http_method" => "",
-                    "http_path" => "/auth/roles\r\n/auth/permissions\r\n/auth/menu\r\n/auth/logs"
+                    "http_path" => "/auth/roles\r\n/auth/permissions\r\n/auth/menu\r\n/auth/logs",
                 ],
                 [
                     "name" => "Teacher Management",
                     "slug" => "auth.teacher",
-                    "http_method" => "GET,POST",
-                    "http_path" => "/teachers\r\n/teachers/*"
+                    "http_method" => "GET,POST,PUT",
+                    "http_path" => "/teachers\r\n/teachers/*",
                 ],
                 [
                     "name" => "School Management",
                     "slug" => "auth.school",
                     "http_method" => "",
-                    "http_path" => "/schools"
+                    "http_path" => "/schools\r\n/schools/*",
                 ],
                 [
                     "name" => "Student Management",
                     "slug" => "auth.student",
                     "http_method" => "",
-                    "http_path" => "/students"
-                ]
+                    "http_path" => "/students\r\n/students/*",
+                ],
+                [
+                    "name" => "Invitation Management",
+                    "slug" => "auth.invitation",
+                    "http_method" => "",
+                    "http_path" => "/invitations\r\n/invitations/*",
+                ],
             ]
         );
 
@@ -160,12 +166,12 @@ class AdminTablesSeeder extends Seeder
             [
                 [
                     "name" => "Administrator",
-                    "slug" => "administrator"
+                    "slug" => "administrator",
                 ],
                 [
                     "name" => "Teacher",
-                    "slug" => "teacher"
-                ]
+                    "slug" => "teacher",
+                ],
             ]
         );
 
@@ -175,32 +181,32 @@ class AdminTablesSeeder extends Seeder
             [
                 [
                     "role_id" => 1,
-                    "menu_id" => 2
+                    "menu_id" => 2,
                 ],
                 [
                     "role_id" => 1,
-                    "menu_id" => 8
+                    "menu_id" => 8,
                 ],
                 [
                     "role_id" => 1,
-                    "menu_id" => 9
+                    "menu_id" => 9,
                 ],
                 [
                     "role_id" => 1,
-                    "menu_id" => 10
+                    "menu_id" => 10,
                 ],
                 [
                     "role_id" => 2,
-                    "menu_id" => 8
+                    "menu_id" => 8,
                 ],
                 [
                     "role_id" => 2,
-                    "menu_id" => 9
+                    "menu_id" => 9,
                 ],
                 [
                     "role_id" => 2,
-                    "menu_id" => 10
-                ]
+                    "menu_id" => 10,
+                ],
             ]
         );
 
@@ -209,32 +215,36 @@ class AdminTablesSeeder extends Seeder
             [
                 [
                     "role_id" => 1,
-                    "permission_id" => 1
+                    "permission_id" => 1,
                 ],
                 [
                     "role_id" => 2,
-                    "permission_id" => 2
+                    "permission_id" => 2,
                 ],
                 [
                     "role_id" => 2,
-                    "permission_id" => 3
+                    "permission_id" => 3,
                 ],
                 [
                     "role_id" => 2,
-                    "permission_id" => 4
+                    "permission_id" => 4,
                 ],
                 [
                     "role_id" => 2,
-                    "permission_id" => 6
+                    "permission_id" => 6,
                 ],
                 [
                     "role_id" => 2,
-                    "permission_id" => 7
+                    "permission_id" => 7,
                 ],
                 [
                     "role_id" => 2,
-                    "permission_id" => 8
-                ]
+                    "permission_id" => 8,
+                ],
+                [
+                    "role_id" => 2,
+                    "permission_id" => 9,
+                ],
             ]
         );
 
@@ -247,8 +257,8 @@ class AdminTablesSeeder extends Seeder
                     "password" => "\$2y\$10\$Y1pIqWsxb6vaWoev7ORUjeB553OCnA.VaKFZ4k8mIQ4zQfvEZtjyu",
                     "name" => "Administrator",
                     "avatar" => NULL,
-                    "remember_token" => "zd5QqlnUYA5bIdIfe2g3QXPhBD54b4KH5baBkXxhOhbuA2nIobAELdAcyZik"
-                ]
+                    "remember_token" => "zd5QqlnUYA5bIdIfe2g3QXPhBD54b4KH5baBkXxhOhbuA2nIobAELdAcyZik",
+                ],
             ]
         );
 
@@ -257,8 +267,8 @@ class AdminTablesSeeder extends Seeder
             [
                 [
                     "role_id" => 1,
-                    "user_id" => 1
-                ]
+                    "user_id" => 1,
+                ],
             ]
         );
 
