@@ -81,7 +81,7 @@ class InvitationsController extends Controller
         Invitation::query()
             ->create($input);
 
-        if ($teacher = User::query()
+        /*if ($teacher = User::query()
             ->where('email', $input['email'])
             ->first()) {
             $teacher->update([
@@ -97,7 +97,7 @@ class InvitationsController extends Controller
                 ]);
         }
 
-        Mail::to($teacher)->send(new InvitationToJoinOurSchool($teacher));
+        Mail::to($teacher)->send(new InvitationToJoinOurSchool($teacher));*/
 
         return response()->json([
             'message' => 'OK.',
