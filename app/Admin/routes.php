@@ -5,14 +5,14 @@ use Illuminate\Routing\Router;
 Admin::routes();
 
 Route::group([
-    'prefix'        => config('admin.route.prefix'),
-    'namespace'     => config('admin.route.namespace'),
-    'middleware'    => config('admin.route.middleware'),
-    'as'            => config('admin.route.prefix') . '.',
+    'prefix' => config('admin.route.prefix'),
+    'namespace' => config('admin.route.namespace'),
+    'middleware' => config('admin.route.middleware'),
+    'as' => config('admin.route.prefix') . '.',
 ], function (Router $router) {
-
     $router->get('/', 'HomeController@index')->name('home');
     $router->resource('teachers', TeachersController::class);
     $router->resource('schools', SchoolsController::class);
     $router->resource('students', StudentsController::class);
+    $router->resource('invitations', InvitationsController::class);
 });

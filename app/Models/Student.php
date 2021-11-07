@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
@@ -41,12 +40,20 @@ class Student extends Authenticatable
      */
     protected $appends = [
         'type',
+        'school_name',
     ];
 
     /* Accessors */
     public function getTypeAttribute()
     {
         return $this->type;
+    }
+
+    public function getSchoolNameAttribute()
+    {
+        return School::query()
+            ->find($this->attributes['school_id'])
+            ->name;
     }
 
     /* Eloquent Relationships */

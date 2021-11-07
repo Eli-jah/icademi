@@ -48,8 +48,9 @@ Migrated:  2014_10_12_100000_create_password_resets_table
 7. php artisan vendor:publish --provider="Encore\Admin\AdminServiceProvider"
 8. php artisan admin:install
 9. php artisan db:seed
-10. php artisan optimize
-11. composer {list | dumpautoload | dump-autoload}
+10. php artisan passport:install
+11. php artisan optimize
+12. composer {list | dumpautoload | dump-autoload}
 
 ### Common Operations
 

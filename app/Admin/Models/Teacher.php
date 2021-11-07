@@ -13,4 +13,5 @@ class Teacher extends User
      */
     protected $table = 'users';
 
+    const PASSWORD = 'PASSWORD';
 }
