@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 class School extends Model
 {
@@ -36,6 +37,8 @@ class School extends Model
     protected $appends = [
         'is_approved',
         'is_rejected',
+        'founder_name',
+        'student_count',
     ];
 
     /* Accessors */
@@ -47,6 +50,39 @@ class School extends Model
     public function getIsRejectedAttribute()
     {
         return !empty($this->attributes['rejected_at']);
+    }
+
+    public function getFounderNameAttribute()
+    {
+        return User::query()->find($this->attributes['user_id'])->attributes['name'];
+    }
+
+    public function getStudentCountAttribute()
+    {
+        return Student::query()->where('school_id', $this->attributes['id'])->count();
+    }
+
+    /* Mutators */
+    public function setIsApprovedAttribute($value)
+    {
+        if ($value) {
+            $this->attributes['approved_at'] = Carbon::now()->toDateTimeString();
+            $this->attributes['rejected_at'] = null;
+        } else {
+            $this->attributes['approved_at'] = null;
+            $this->attributes['rejected_at'] = Carbon::now()->toDateTimeString();
+        }
+    }
+
+    public function setIsRejectedAttribute($value)
+    {
+        if ($value) {
+            $this->attributes['approved_at'] = null;
+            $this->attributes['rejected_at'] = Carbon::now()->toDateTimeString();
+        } else {
+            $this->attributes['approved_at'] = Carbon::now()->toDateTimeString();
+            $this->attributes['rejected_at'] = null;
+        }
     }
 
     /* Eloquent Relationships */

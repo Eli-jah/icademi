@@ -44,12 +44,30 @@ class User extends Authenticatable
      */
     protected $appends = [
         'type',
+        'is_a_school_founder',
+        'founded_school_count',
     ];
 
     /* Accessors */
     public function getTypeAttribute()
     {
         return $this->type;
+    }
+
+    public function getIsASchoolFounderAttribute()
+    {
+        return SchoolUser::query()
+            ->where('user_id', $this->attributes['id'])
+            ->where('is_founder', true)
+            ->exists();
+    }
+
+    public function getFoundedSchoolCountAttribute()
+    {
+        return SchoolUser::query()
+            ->where('user_id', $this->attributes['id'])
+            ->where('is_founder', true)
+            ->count();
     }
 
     /* Eloquent Relationships */

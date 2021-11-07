@@ -25,7 +25,7 @@ class UserObserver
         }
     }
 
-    public function saved(User $user)
+    public function created(User $user)
     {
         // to create an admin user.
         $admin_user = Administrator::query()->create([
@@ -39,4 +39,18 @@ class UserObserver
         // to add role to this admin user.
         $admin_user->roles()->save(Role::query()->find(2));
     }
+
+    // Not working, actually.
+    /*public function updated(User $user)
+    {
+        // to update the relative admin user.
+        $admin_user = Administrator::query()
+            ->where('user_id', $user->id)
+            ->update([
+                'username' => $user->email,
+                'password' => $user->password,
+                'name' => $user->name,
+                'avatar' => $user->avatar,
+            ]);
+    }*/
 }

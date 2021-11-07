@@ -68,11 +68,6 @@ class SchoolsController extends Controller
         $input['user_id'] = $user->id;
         $school = School::query()
             ->create($input);
-        $input['school_id'] = $school->id;
-        $input['is_founder'] = true;
-        unset($input['name']);
-        SchoolUser::query()
-            ->create($input);
 
         $data['name'] = $school->name;
         $data['message'] = 'OK.';
