@@ -265,3 +265,25 @@ composer require doctrine/dbal:2.*
 composer require doctrine/dbal
 ```
 
+#### LaravelS
+
+> Reference: [https://github.com/hhxsv5/laravel-s](https://github.com/hhxsv5/laravel-s)
+
+1. Install
+```angular2html
+composer require hhxsv5/laravel-s
+```
+2. Publish
+```angular2html
+php artisan laravels publish
+```
+3. Test
+```angular2html
+php bin/laravels start
+```
+
+#### Predis
+
+> composer require predis/predis
+
+

@@ -9,10 +9,12 @@
         "doctrine/dbal": "2.*",
         "encore/laravel-admin": "^1.8",
         "fideloper/proxy": "~3.3",
+        "hhxsv5/laravel-s": "^3.7",
         "laravel/framework": "5.5.*",
         "laravel/passport": "~4.0",
         "laravel/tinker": "~1.0",
-        "lcobucci/jwt": "3.3.3"
+        "lcobucci/jwt": "3.3.3",
+        "predis/predis": "^1.1"
     },
     "require-dev": {
         "filp/whoops": "~2.0",
