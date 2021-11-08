@@ -71,13 +71,15 @@ class TeachersController extends Controller
             return $is_a_school_founder ? '<span class="label label-primary">YES</span>' : '<span class="label label-default">NO</span>';
         });
 
-        $grid->column('', 'Send Email')->display(function () use ($is_teacher, $teacher_id) {
-            if ($is_teacher && $teacher_id != $this->id && !$this->is_a_school_founder) {
-                return '<a class="btn btn-xs btn-primary" style="margin-right:8px" href="' . route('admin.invitations.create', [
-                        'recipient_id' => $this->id,
-                    ]) . '">Send Email</a>';
-            }
-        });
+        if ($is_teacher) {
+            $grid->column('', 'Send Email')->display(function () use ($is_teacher, $teacher_id) {
+                if ($is_teacher && $teacher_id != $this->id && !$this->is_a_school_founder) {
+                    return '<a class="btn btn-xs btn-primary" style="margin-right:8px" href="' . route('admin.invitations.create', [
+                            'recipient_id' => $this->id,
+                        ]) . '">Send Email</a>';
+                }
+            });
+        }
 
         return $grid;
     }
