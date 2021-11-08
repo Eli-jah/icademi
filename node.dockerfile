@@ -3,6 +3,8 @@ FROM node:lts
 
 # docker build -t my-nodejs-app .
 # docker run -it --rm --name my-running-app my-nodejs-app
+# docker container run -it --name my-node-service -w /var/www/html -v /your/local/path:/var/www/html node:lts /bin/bash
+# docker container run -it --rm --name my-node-service -w /var/www/html -v /your/local/path:/var/www/html node:lts /bin/bash
 
 # To install basic tools
 RUN apt update && apt list --upgradable && apt upgrade -y && apt autoremove -y
