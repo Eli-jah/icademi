@@ -1,4 +1,8 @@
 <?php
+/**
+ * @see https://github.com/hhxsv5/laravel-s/blob/master/Settings-CN.md  Chinese
+ * @see https://github.com/hhxsv5/laravel-s/blob/master/Settings.md  English
+ */
 
 return [
     /*
@@ -56,6 +60,7 @@ return [
     */
 
     'socket_type' => defined('SWOOLE_SOCK_TCP') ? SWOOLE_SOCK_TCP : 1,
+    'enable_coroutine_runtime' => false,
 
     /*
     |--------------------------------------------------------------------------
@@ -105,19 +110,19 @@ return [
 
     'inotify_reload' => [
         // Whether enable the Inotify Reload to reload all worker processes when your code is modified.
-        'enable'        => env('LARAVELS_INOTIFY_RELOAD', false),
+        'enable' => env('LARAVELS_INOTIFY_RELOAD', false),
 
         // The file path that Inotify watches
-        'watch_path'    => base_path(),
+        'watch_path' => base_path(),
 
         // The file types that Inotify watches
-        'file_types'    => ['.php'],
+        'file_types' => ['.php'],
 
         // The excluded/ignored directories that Inotify watches
         'excluded_dirs' => [],
 
         // Whether output the reload log
-        'log'           => true,
+        'log' => true,
     ],
 
     /*
@@ -133,7 +138,15 @@ return [
     |
     */
 
-    'event_handlers' => [],
+    'event_handlers' => [
+        // 'WorkerStart' => \App\Events\WorkerStartEvent::class,
+    ],
+
+    'events' => [
+        \App\Events\MessageReceived::class => [
+            \App\Listeners\MessageReceivedListener::class,
+        ],
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -147,8 +160,39 @@ return [
     */
 
     'websocket' => [
-        'enable' => false,
+        // 'enable' => false,
         // 'handler' => XxxWebSocketHandler::class,
+        'enable' => true,
+        'handler' => \App\Services\WebSocketService::class,
+        // 'handler' => \App\Services\WebSocketHandler::class,
+        // 'handler' => \App\Services\WebSocket\WebSocketHandler::class,
+        // 'parser' => \App\Services\WebSocket\SocketIO\SocketIOParser::class,
+        // 'drivers' => [
+        //     'default' => 'redis',
+        //     'table' => \App\Services\Websocket\Conversations\TableConversation::class,
+        //     'redis' => \App\Services\Websocket\Conversations\RedisConversation::class,
+        //     'settings' => [
+        //         'table' => [
+        //             'conversation_rows' => 4096,
+        //             'conversation_size' => 2048,
+        //             'client_rows' => 8192,
+        //             'client_size' => 2048,
+        //         ],
+        //         'redis' => [
+        //             'server' => [
+        //                 'host' => env('REDIS_HOST', '127.0.0.1'),
+        //                 'password' => env('REDIS_PASSWORD', null),
+        //                 'port' => env('REDIS_PORT', 6379),
+        //                 'database' => 0,
+        //                 'persistent' => true,
+        //             ],
+        //             'options' => [
+        //                 //
+        //             ],
+        //             'prefix' => 'swoole:',
+        //         ],
+        //     ],
+        // ],
     ],
 
     /*
@@ -190,21 +234,21 @@ return [
     */
 
     'timer' => [
-        'enable'          => env('LARAVELS_TIMER', false),
+        'enable' => env('LARAVELS_TIMER', false),
 
         // The list of cron job
-        'jobs'            => [
+        'jobs' => [
             // Enable LaravelScheduleJob to run `php artisan schedule:run` every 1 minute, replace Linux Crontab
             // Hhxsv5\LaravelS\Illuminate\LaravelScheduleJob::class,
         ],
 
         // Max waiting time of reloading
-        'max_wait_time'   => 5,
+        'max_wait_time' => 5,
 
         // Enable the global lock to ensure that only one instance starts the timer
         // when deploying multiple instances.
         // This feature depends on Redis https://laravel.com/docs/8.x/redis
-        'global_lock'     => false,
+        'global_lock' => false,
         'global_lock_key' => config('app.name', 'Laravel'),
     ],
 
@@ -249,7 +293,11 @@ return [
     |
     */
 
-    'cleaners' => [],
+    'cleaners' => [
+        \Hhxsv5\LaravelS\Illuminate\Cleaners\SessionCleaner::class, // If you use the session or authentication in your project, please uncomment this line
+        \Hhxsv5\LaravelS\Illuminate\Cleaners\AuthCleaner::class, // If you use the authentication or passport in your project, please uncomment this line
+        \Hhxsv5\LaravelS\Illuminate\Cleaners\JWTCleaner::class, // If you use the package "tymon/jwt-auth" in your project, please uncomment this line
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -264,7 +312,7 @@ return [
     */
 
     'destroy_controllers' => [
-        'enable'        => false,
+        'enable' => false,
         'excluded_list' => [],
     ],
 
@@ -282,28 +330,44 @@ return [
     */
 
     'swoole' => [
-        'daemonize'          => env('LARAVELS_DAEMONIZE', false),
-        'dispatch_mode'      => env('LARAVELS_DISPATCH_MODE', 2),
-        'reactor_num'        => env('LARAVELS_REACTOR_NUM', function_exists('swoole_cpu_num') ? swoole_cpu_num() : 8),
-        'worker_num'         => env('LARAVELS_WORKER_NUM', function_exists('swoole_cpu_num') ? swoole_cpu_num() * 4 : 8),
+        'daemonize' => env('LARAVELS_DAEMONIZE', false),
+        'dispatch_mode' => env('LARAVELS_DISPATCH_MODE', 2),
+        'reactor_num' => env('LARAVELS_REACTOR_NUM', function_exists('swoole_cpu_num') ? swoole_cpu_num() : 8),
+        'worker_num' => env('LARAVELS_WORKER_NUM', function_exists('swoole_cpu_num') ? swoole_cpu_num() * 4 : 8),
         //'task_worker_num'    => env('LARAVELS_TASK_WORKER_NUM', function_exists('swoole_cpu_num') ? swoole_cpu_num() * 4 : 8),
-        'task_ipc_mode'      => 1,
-        'task_max_request'   => env('LARAVELS_TASK_MAX_REQUEST', 100000),
-        'task_tmpdir'        => @is_writable('/dev/shm/') ? '/dev/shm' : '/tmp',
-        'max_request'        => env('LARAVELS_MAX_REQUEST', 100000),
-        'open_tcp_nodelay'   => true,
-        'pid_file'           => storage_path('laravels.pid'),
-        'log_level'          => 4,
-        'log_file'           => storage_path(sprintf('logs/swoole-%s.log', date('Y-m'))),
-        'document_root'      => base_path('public'),
+        'task_worker_num' => function_exists('swoole_cpu_num') ? swoole_cpu_num() * 2 : 8,
+        'task_ipc_mode' => 1,
+        'task_max_request' => env('LARAVELS_TASK_MAX_REQUEST', 100000),
+        'task_tmpdir' => @is_writable('/dev/shm/') ? '/dev/shm' : '/tmp',
+        'max_request' => env('LARAVELS_MAX_REQUEST', 100000),
+        'open_tcp_nodelay' => true,
+        'pid_file' => storage_path('laravels.pid'),
+        'log_level' => 4,
+        'log_file' => storage_path(sprintf('logs/swoole-%s.log', date('Y-m'))),
+        'document_root' => base_path('public'),
         'buffer_output_size' => 2 * 1024 * 1024,
         'socket_buffer_size' => 8 * 1024 * 1024,
         'package_max_length' => 4 * 1024 * 1024,
-        'reload_async'       => true,
-        'max_wait_time'      => 60,
-        'enable_reuse_port'  => true,
-        'enable_coroutine'   => false,
-        'upload_tmp_dir'     => @is_writable('/dev/shm/') ? '/dev/shm' : '/tmp',
-        'http_compression'   => false,
+        'reload_async' => true,
+        'max_wait_time' => 60,
+        'enable_reuse_port' => true,
+        'enable_coroutine' => false,
+        'upload_tmp_dir' => @is_writable('/dev/shm/') ? '/dev/shm' : '/tmp',
+        'http_compression' => false,
+        // All connections are traversed every 60 seconds. If a connection does not send any data to the server within 600 seconds, the connection will be forced to close.
+        'heartbeat_idle_time' => 600,
+        'heartbeat_check_interval' => 60,
+
+        // Slow log
+        // 'request_slowlog_timeout' => 2,
+        // 'request_slowlog_file'    => storage_path(sprintf('logs/slow-%s.log', date('Y-m'))),
+        // 'trace_event_worker'      => true,
+
+        /**
+         * More settings of Swoole
+         *
+         * @see https://wiki.swoole.com/wiki/page/274.html  Chinese
+         * @see https://www.swoole.co.uk/docs/modules/swoole-server/configuration  English
+         */
     ],
 ];
