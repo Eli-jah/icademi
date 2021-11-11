@@ -16,6 +16,8 @@ app/storage/
 /public_html/hot
 
 /storage/*.key
+/storage/laravels*
+/storage/oauth*
 .env
 Homestead.yaml
 Homestead.json
