@@ -1,6 +1,5 @@
-*
-!laravels.conf
-!laravels.pid
-!oauth-private.key
-!oauth-public.key
+laravels.conf
+laravels.pid
+oauth-private.key
+oauth-public.key
 !.gitignore
