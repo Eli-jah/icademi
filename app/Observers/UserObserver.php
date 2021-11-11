@@ -5,6 +5,7 @@ namespace App\Observers;
 use App\Models\User;
 use Encore\Admin\Auth\Database\Administrator;
 use Encore\Admin\Auth\Database\Role;
+use Illuminate\Support\Str;
 
 class UserObserver
 {
@@ -22,6 +23,9 @@ class UserObserver
         // 这样写扩展性更高，只有空的时候才指定默认头像
         if (empty($user->avatar)) {
             $user->avatar = asset('defaults/default_avatar.jpeg');
+        }
+        if (empty($user->ws_token)) {
+            $user->ws_token = Str::random(32);
         }
     }
 

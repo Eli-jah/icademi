@@ -4,9 +4,11 @@ namespace App\Providers;
 
 use App\Models\Invitation;
 use App\Models\School;
+use App\Models\Student;
 use App\Models\User;
 use App\Observers\InvitationObserver;
 use App\Observers\SchoolObserver;
+use App\Observers\StudentObserver;
 use App\Observers\UserObserver;
 use Illuminate\Support\ServiceProvider;
 
@@ -21,6 +23,7 @@ class AppServiceProvider extends ServiceProvider
     {
         User::observe(UserObserver::class);
         School::observe(SchoolObserver::class);
+        Student::observe(StudentObserver::class);
         Invitation::observe(InvitationObserver::class);
     }
 

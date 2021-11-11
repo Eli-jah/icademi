@@ -64,6 +64,11 @@
                 margin-bottom: 30px;
             }
         </style>
+
+        <!-- Socket.io Client -->
+        {{-- <script src="https://cdn.socket.io/4.3.2/socket.io.min.js" integrity="sha384-KAZ4DtjNhLChOB/hxXuKqhMLYvx3b5MlT55xPEiNmREKRzeEm+RVPlTnAn0ajQNs" crossorigin="anonymous"></script>--}}
+        <script src="{{ asset('socket.io.js') }}"></script>
+
     </head>
     <body>
         <div class="flex-center position-ref full-height">
