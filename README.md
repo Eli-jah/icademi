@@ -281,6 +281,10 @@ php artisan laravels publish
 ```angular2html
 php bin/laravels start
 ```
+4. Commands
+```angular2html
+php bin/laravels {start|stop|restart|reload|info|help}
+```
 
 #### Predis
 

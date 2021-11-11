@@ -10,6 +10,7 @@ class Student extends Authenticatable
 {
     use HasApiTokens, Notifiable;
 
+    const PASSWORD = 'Password123';
     public $type = 'student';
 
     /**
@@ -22,6 +23,7 @@ class Student extends Authenticatable
         'name',
         'email',
         'password',
+        'ws_token',
     ];
 
     /**
@@ -31,6 +33,7 @@ class Student extends Authenticatable
      */
     protected $hidden = [
         'password',
+        'ws_token',
     ];
 
     /**

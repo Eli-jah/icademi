@@ -24,6 +24,7 @@ class User extends Authenticatable
         'password',
         'random_code',
         'avatar',
+        'ws_token',
         'remember_token',
     ];
 
@@ -34,6 +35,7 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
+        'ws_token',
         'remember_token',
     ];
 
@@ -99,5 +101,10 @@ class User extends Authenticatable
     public function received_invitations()
     {
         return $this->hasMany(Invitation::class, 'email', 'email');
+    }
+
+    public function conversations()
+    {
+        return $this->hasMany(Conversation::class, 'user_id', 'id');
     }
 }

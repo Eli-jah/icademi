@@ -8,6 +8,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 use Laravel\Passport\Token;
 
 class PassportController extends Controller
@@ -62,6 +63,7 @@ class PassportController extends Controller
 
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
+        $input['ws_token'] = Str::random(32);
         unset($input['confirm_password']);
 
         if ($user = User::query()
@@ -88,6 +90,7 @@ class PassportController extends Controller
 
         $data['name'] = $user->name;
         $data['token'] = $user->createToken('icademi-teacher')->accessToken;
+        $data['ws_token'] = $user->ws_token;
 
         return response()->json([
             'data' => $data,
@@ -134,6 +137,7 @@ class PassportController extends Controller
             $user = Auth::guard('web')->user();
             $data['type'] = 'teacher';
             $data['token'] = $user->createToken('icademi-teacher')->accessToken;
+            $data['ws_token'] = Str::random(32);
             return response()->json([
                 'data' => $data,
             ], self::STATUS_SUCCESS);
@@ -141,6 +145,7 @@ class PassportController extends Controller
             $student = Auth::guard('student-web')->user();
             $data['type'] = 'student';
             $data['token'] = $student->createToken('icademi-student')->accessToken;
+            $data['ws_token'] = Str::random(32);
             return response()->json([
                 'data' => $data,
             ], self::STATUS_SUCCESS);

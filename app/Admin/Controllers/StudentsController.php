@@ -168,7 +168,8 @@ EOT;
         // $grid->column('school_id', __('School id'));
         $grid->column('school_name', __('School'));
         $grid->column('name', __('Name'));
-        $grid->column('email', __('Email'));
+        $grid->column('email', __('Email'))->copyable();
+        $grid->column('avatar', __('Avatar'))->image('', 40);
         // $grid->column('password', __('Password'));
         // $grid->column('created_at', __('Created at'));
         // $grid->column('updated_at', __('Updated at'));
@@ -255,6 +256,7 @@ HTML;
         $show->field('school_name', __('School'));
         $show->field('name', __('Name'));
         $show->field('email', __('Email'));
+        $show->field('avatar', __('Avatar'))->image('', 120);
         // $show->field('password', __('Password'));
         // $show->field('created_at', __('Created at'));
         // $show->field('updated_at', __('Updated at'));
@@ -368,10 +370,14 @@ EOT;
         $form->text('name', __('Name'))->required(true)->placeholder('Student name ...');
         if ($form->isCreating()) {
             $form->email('email', __('Email'));
-            $form->password('password', __('Password'));
+            $form->password('password', __('Password'))->default(Student::PASSWORD)->placeholder('Default Password is: ' . Student::PASSWORD);
         } else if ($form->isEditing()) {
             $form->email('email', __('Email'))->readonly();
         }
+        $form->image('avatar', __('Avatar'))
+            ->uniqueName()
+            ->move('avatar')
+            ->rules('required|image');
 
         $form->saving(function (Form $form) {
             //
