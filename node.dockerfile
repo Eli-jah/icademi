@@ -1,10 +1,11 @@
-# FROM node:6
 FROM node:lts
 
 # docker build -t my-nodejs-app .
 # docker run -it --rm --name my-running-app my-nodejs-app
 # docker container run -it --name my-node-service -w /var/www/html -v /your/local/path:/var/www/html node:lts /bin/bash
 # docker container run -it --rm --name my-node-service -w /var/www/html -v /your/local/path:/var/www/html node:lts /bin/bash
+# docker container run -it --rm --name my-node-service -w /var/www/html -v "$PWD":/var/www/html node:lts /bin/bash
+# docker container run -it --rm --name my-node-service -w /var/www/html -v "$(pwd)":/var/www/html node:lts /bin/bash
 
 # To install basic tools
 RUN apt update && apt list --upgradable && apt upgrade -y && apt autoremove -y
@@ -38,6 +39,9 @@ COPY . .
 
 # -S => --save | -D => --save-dev
 # RUN npm install
+# RUN npm audit fix
+# RUN npm audit fix --force
+# RUN npm audit
 # RUN cnpm install
 # RUN cnpm install sass-loader --save-dev
 # RUN cnpm install node-sass --save-dev
@@ -59,7 +63,7 @@ ENV NODE_ENV=devlopment
 
 EXPOSE 8888
 
-# CMD [ "npm run watch-poll" ]
+CMD [ "npm run watch-poll" ]
 # CMD [ "/usr/local/bin/apidoc -i app/Http/Controllers/Api/ -o public/apidoc/" ]
 # CMD [ "npm run watch -- --watch-poll" ]
 # CMD [ "npm start" ]

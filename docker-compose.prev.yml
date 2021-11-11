@@ -1,10 +1,10 @@
 version: "3"
 
-services:
+services: 
   app:
     # image: "php:7.4.25-fpm"
     # image: "phpswoole/swoole:4.8.0-php7.4"
-    build:
+    build: 
       context: ./
       dockerfile: php.dockerfile
       # dockerfile: php-swoole.dockerfile
@@ -25,18 +25,18 @@ services:
     environment:
       - TZ=Asia/Shanghai
     # container_name: app
-    volumes:
+    volumes: 
       # - ./etc/profile/:/root/
       - ./:/var/www/html
   db:
     # image: "mysql:5.7.36"
-    build:
+    build: 
       context: ./
       dockerfile: mysql.dockerfile
     command: --default-authentication-plugin=mysql_native_password
     expose:
       - "3306"
-    ports:
+    ports: 
       - "3336:3306"
     environment:
       - TZ=Asia/Shanghai
@@ -56,12 +56,12 @@ services:
       - "6379:6379"
     environment:
       - TZ=Asia/Shanghai
-      # container_name: cache
-      # volumes:
+    # container_name: cache
+    # volumes:
       # - ./etc/profile/:/root/
   web:
     # image: "nginx:latest"
-    build:
+    build: 
       context: ./
       dockerfile: nginx.dockerfile
     links:

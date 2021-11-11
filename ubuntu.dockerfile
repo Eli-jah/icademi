@@ -1,10 +1,10 @@
-FROM php:7.4.25-fpm
+FROM ubuntu:20.04
 
-# docker pull php:7.4.25-fpm
+# docker pull ubuntu:20.04
 
-# docker container run -it --rm --name icademi_app \
-# -p 9000:9000 -v "$PWD": /var/www/html -w  /var/www/html \
-# php:7.4.25-fpm /bin/bash
+# docker container run -it --name ubuntu_server \
+# -p 8088:80 -v "$PWD":/var/www/html -w /var/www/html \
+# ubuntu:20.04 /bin/bash
 
 # To install basic tools
 RUN apt update && apt list --upgradable && apt upgrade -y && apt autoremove -y
@@ -13,11 +13,13 @@ RUN apt install -y gcc g++ make git wget vim zip net-tools build-essential
 # To install crond service
 RUN apt install -y cron
 
+# /etc/crontab/conf.d/laravel.conf
 # * * * * * php /path-to-your-project/artisan schedule:run >> /dev/null 2>&1
 
 # To install supervisor service
 RUN apt install -y supervisor
 
+# /etc/supervisord/conf.d/laravel-s-test.conf
 # [program:laravel-s-test]
 # command=/user/local/bin/php /path/to/project/bin/laravels start -i
 # numprocs=1
@@ -50,24 +52,24 @@ RUN apt install -y supervisor
 # RUN apt update && apt install -y yarn
 # RUN npm install -g @vue/cli
 
-RUN apt update
-RUN apt install -y libfreetype6-dev libjpeg62-turbo-dev libpng-dev libwebp-dev
-RUN apt install -y libxml2 libxml2-dev
-RUN apt install -y libicu-dev
-RUN apt install -y libmcrypt-dev libmcrypt4
-RUN apt install -y libxslt1-dev
-RUN docker-php-source extract
-RUN docker-php-ext-install -j$(nproc) gd
+# RUN apt update
+# RUN apt install -y libfreetype6-dev libjpeg62-turbo-dev libpng-dev libwebp-dev
+# RUN apt install -y libxml2 libxml2-dev
+# RUN apt install -y libicu-dev
+# RUN apt install -y libmcrypt-dev libmcrypt4
+# RUN apt install -y libxslt1-dev
+# RUN docker-php-source extract
+# RUN docker-php-ext-install -j$(nproc) gd
 # To install the MySQL extensions.
-RUN docker-php-ext-install mysqli pdo pdo_mysql
-RUN docker-php-ext-install bcmath gettext intl pcntl
-RUN docker-php-ext-install shmop soap sockets sysvsem xmlrpc xsl
-RUN pecl channel-update pecl.php.net
+# RUN docker-php-ext-install mysqli pdo pdo_mysql
+# RUN docker-php-ext-install bcmath gettext intl pcntl
+# RUN docker-php-ext-install shmop soap sockets sysvsem xmlrpc xsl
+# RUN pecl channel-update pecl.php.net
 # To install the Redis extension.
-RUN set -ex \
-    && pecl update-channels \
-    && pecl install redis-stable \
-    && docker-php-ext-enable redis
+# RUN set -ex \
+#     && pecl update-channels \
+#     && pecl install redis-stable \
+#     && docker-php-ext-enable redis
 
 # RUN apt update && apt install -y \
         # for docker-php-exe-install -j$(nproc) gd \
@@ -98,11 +100,11 @@ RUN set -ex \
 
 # RUN mkdir -p /usr/include/openssl
 
-RUN pecl install -D 'enable-sockets="no" enable-openssl="no" enable-http2="yes" enable-mysqlnd="yes" enable-swoole-json="yes" enable-swoole-curl="no" enable-cares="yes"' swoole
+# RUN pecl install -D 'enable-sockets="no" enable-openssl="no" enable-http2="yes" enable-mysqlnd="yes" enable-swoole-json="yes" enable-swoole-curl="no" enable-cares="yes"' swoole
 # OR:
 # RUN pecl install --configureoptions 'enable-sockets="no" enable-openssl="no" enable-http2="yes" enable-mysqlnd="yes" enable-swoole-json="yes" enable-swoole-curl="no" enable-cares="yes"' swoole
 
-RUN echo "extension=swoole.so" > /usr/local/etc/php/conf.d/docker-php-ext-swoole.ini
+# RUN echo "extension=swoole.so" > /usr/local/etc/php/conf.d/docker-php-ext-swoole.ini
 
 # RUN php -m | grep swoole
 # RUN php --ri swoole
@@ -118,9 +120,9 @@ RUN echo "extension=swoole.so" > /usr/local/etc/php/conf.d/docker-php-ext-swoole
 # RUN wget https://getcomposer.org/download/2.1.9/composer.phar -O /usr/local/bin/composer
 # RUN chmod a+x /usr/local/bin/composer
 
-RUN wget https://mirrors.aliyun.com/composer/composer.phar -O /usr/local/bin/composer
-RUN chmod a+x /usr/local/bin/composer
-RUN composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
+# RUN wget https://mirrors.aliyun.com/composer/composer.phar -O /usr/local/bin/composer
+# RUN chmod a+x /usr/local/bin/composer
+# RUN composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
 
 #### Composer ####
 
@@ -135,6 +137,9 @@ COPY . .
 
 ENV TZ=Asia/Shanghai
 
+EXPOSE 80
+EXPOSE 3306
+EXPOSE 8888
 EXPOSE 9000
 EXPOSE 9501
 

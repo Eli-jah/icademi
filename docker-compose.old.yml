@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  server:
+    # image: "ubuntu:20.04"
+    build:
+      context: ./
+      dockerfile: ubuntu.dockerfile
+    # expose: ["9000", '9501']
+    expose:
+      - "80"
+      - "3306"
+      - "9000"
+      - "9501"
+    # ports: ["9000", '9501']
+    ports:
+      - "8088:80"
+      - "3336:3306"
+      - "8888:8888"
+      - "9000:9000"
+      - "9501:9501"
+    environment:
+      - TZ=Asia/Shanghai
+    # container_name: server
+    volumes:
+      # - ./etc/profile/:/root/
+      - ./:/var/www/html
+
+
