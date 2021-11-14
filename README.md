@@ -286,6 +286,11 @@ php bin/laravels start
 php bin/laravels {start|stop|restart|reload|info|help}
 ```
 
+5. Uninstall
+```angular2html
+composer remove hhxsv5/laravel-s
+```
+
 #### Predis
 
 > composer require predis/predis
