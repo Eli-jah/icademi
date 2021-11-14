@@ -12,7 +12,8 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    // return view('welcome');
+    return view('index');
 });
 
 Auth::routes();
@@ -33,3 +34,6 @@ Auth::routes();
 // $this->post('password/reset', 'Auth\ResetPasswordController@reset');
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/socket.io', 'SocketIOController@upgrade');
+Route::post('/socket.io', 'SocketIOController@ok');

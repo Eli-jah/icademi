@@ -33,11 +33,11 @@
 2. cp .env.example .env
 3. php artisan key:generate
 4. php artisan storage:link
-5. php artisan make:auth
+5. php artisan make:auth [SKIP]
 ```angular2html
 Authentication scaffolding generated successfully.
 ```
-6. php artisan migrate
+6. php artisan migrate --seed
 ```angular2html
 Migration table created successfully.
 Migrating: 2014_10_12_000000_create_users_table
@@ -45,9 +45,9 @@ Migrated:  2014_10_12_000000_create_users_table
 Migrating: 2014_10_12_100000_create_password_resets_table
 Migrated:  2014_10_12_100000_create_password_resets_table
 ```
-7. php artisan vendor:publish --provider="Encore\Admin\AdminServiceProvider"
-8. php artisan admin:install
-9. php artisan db:seed
+7. php artisan vendor:publish --provider="Encore\Admin\AdminServiceProvider" [SKIP]
+8. php artisan admin:install [SKIP]
+9. php artisan db:seed [SKIP]
 10. php artisan passport:install
 11. php artisan optimize
 12. composer {list | dumpautoload | dump-autoload}

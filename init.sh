@@ -16,11 +16,11 @@ cp .env.example .env
 php artisan key:generate
 php artisan storage:link
 # php artisan make:auth
-php artisan migrate
-php artisan db:seed
+php artisan migrate --seed
+# php artisan db:seed
 php artisan passport:install
 # php artisan vendor:publish --tag=passport-components
-php artisan admin:install
+# php artisan admin:install
 # php artisan vendor:publish --provider="Encore\Admin\AdminServiceProvider"
 
 # php artisan migrate:refresh --seed
