@@ -1,3 +1,5 @@
 laravels.conf
 laravels.pid
+!oauth-public.key
+!oauth-private.key
 !.gitignore
