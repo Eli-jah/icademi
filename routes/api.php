@@ -13,27 +13,27 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::post('passport/register', 'API\PassportController@register');
-Route::post('passport/login', 'API\PassportController@login');
-Route::post('passport/reset_password', 'API\PassportController@resetPassword');
-Route::post('passport/logout', 'API\PassportController@logout');
+Route::post('passport/register', 'Api\PassportController@register');
+Route::post('passport/login', 'Api\PassportController@login');
+Route::post('passport/reset_password', 'Api\PassportController@resetPassword');
+Route::post('passport/logout', 'Api\PassportController@logout');
 
 Route::group(['middleware' => 'auth:user-api'], function () {
-    Route::get('teacher/info', 'API\UsersController@info');
-    Route::post('school/register', 'API\SchoolsController@register');
-    Route::get('teacher/sent_invitations', 'API\UsersController@sentInvitations');
-    Route::get('teacher/received_invitations', 'API\UsersController@receivedInvitations');
-    Route::post('invitation/send', 'API\InvitationsController@send');
-    Route::post('invitation/accept', 'API\InvitationsController@accept');
-    Route::get('school/all_students', 'API\SchoolsController@allStudents');
-    Route::get('school/fans_students', 'API\SchoolsController@fansStudents');
+    Route::get('teacher/info', 'Api\UsersController@info');
+    Route::post('school/register', 'Api\SchoolsController@register');
+    Route::get('teacher/sent_invitations', 'Api\UsersController@sentInvitations');
+    Route::get('teacher/received_invitations', 'Api\UsersController@receivedInvitations');
+    Route::post('invitation/send', 'Api\InvitationsController@send');
+    Route::post('invitation/accept', 'Api\InvitationsController@accept');
+    Route::get('school/all_students', 'Api\SchoolsController@allStudents');
+    Route::get('school/fans_students', 'Api\SchoolsController@fansStudents');
 });
 
 Route::group(['middleware' => 'auth:student-api'], function () {
-    Route::get('student/info', 'API\StudentsController@info');
-    Route::get('school/teachers', 'API\SchoolsController@teachers');
-    Route::get('student/follow_teacher', 'API\StudentsController@followTeacher');
-    Route::get('student/unfollow_teacher', 'API\StudentsController@unfollowTeacher');
+    Route::get('student/info', 'Api\StudentsController@info');
+    Route::get('school/teachers', 'Api\SchoolsController@teachers');
+    Route::get('student/follow_teacher', 'Api\StudentsController@followTeacher');
+    Route::get('student/unfollow_teacher', 'Api\StudentsController@unfollowTeacher');
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
