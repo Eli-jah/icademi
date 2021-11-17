@@ -73,10 +73,9 @@ class WSController extends Controller
                 ->toArray();
             if (!empty($school_ids)) {
                 $data = Student::query()
-                    ->select(['id', 'name'])
                     ->whereIn('school_id', $school_ids)
-                    // ->pluck('name', 'id')
                     ->get()
+                    ->only(['name', 'id'])
                     ->toArray();
             }
         } else if (Auth::guard('student-api')->check()) {
@@ -88,10 +87,9 @@ class WSController extends Controller
                 ->toArray();
             if (!empty($user_ids)) {
                 $data = User::query()
-                    ->select(['id', 'name'])
                     ->whereIn('id', $user_ids)
-                    // ->pluck('name', 'id')
                     ->get()
+                    ->only(['name', 'id'])
                     ->toArray();
             }
         } else {
