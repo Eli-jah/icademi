@@ -75,7 +75,9 @@ class WSController extends Controller
                 $data = Student::query()
                     ->whereIn('school_id', $school_ids)
                     ->get()
-                    ->only(['name', 'id'])
+                    ->each(function($user) {
+                        return $user->only(['id', 'name']);
+                    })
                     ->toArray();
             }
         } else if (Auth::guard('student-api')->check()) {
@@ -89,7 +91,9 @@ class WSController extends Controller
                 $data = User::query()
                     ->whereIn('id', $user_ids)
                     ->get()
-                    ->only(['name', 'id'])
+                    ->each(function($student) {
+                        return $student->only(['id', 'name']);
+                    })
                     ->toArray();
             }
         } else {
