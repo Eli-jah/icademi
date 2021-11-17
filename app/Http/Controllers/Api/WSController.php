@@ -38,11 +38,20 @@ class WSController extends Controller
      * @apiSuccessExample Success-Response:
      *     HTTP/1.1 200 OK
      *     {
-     *       "data": {
-     *         "1": "student-no-1",
-     *         "2": "student-no-2",
-     *         "3": "student-no-3"
-     *       }
+     *       "data": [
+     *         {
+     *           "id": 1,
+     *           "name": "student-no-1"
+     *         },
+     *         {
+     *           "id": 2,
+     *           "name": "student-no-2"
+     *         },
+     *         {
+     *           "id": 3,
+     *           "name": "student-no-3"
+     *         }
+     *       ]
      *     }
      *
      * @apiErrorExample Error-Response:
@@ -66,7 +75,8 @@ class WSController extends Controller
                 $data = Student::query()
                     ->select(['id', 'name'])
                     ->whereIn('school_id', $school_ids)
-                    ->pluck('name', 'id')
+                    // ->pluck('name', 'id')
+                    ->get()
                     ->toArray();
             }
         } else if (Auth::guard('student-api')->check()) {
@@ -80,7 +90,8 @@ class WSController extends Controller
                 $data = User::query()
                     ->select(['id', 'name'])
                     ->whereIn('id', $user_ids)
-                    ->pluck('name', 'id')
+                    // ->pluck('name', 'id')
+                    ->get()
                     ->toArray();
             }
         } else {
