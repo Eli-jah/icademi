@@ -21,4 +21,10 @@ class Message extends Model
         'content',
         'image',
     ];
+
+    /* Eloquent Relationships */
+    public function conversation()
+    {
+        return $this->belongsTo(Conversation::class, 'conversation_id', 'id');
+    }
 }

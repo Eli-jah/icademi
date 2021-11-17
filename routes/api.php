@@ -36,6 +36,10 @@ Route::group(['middleware' => 'auth:student-api'], function () {
     Route::get('student/unfollow_teacher', 'Api\StudentsController@unfollowTeacher');
 });
 
+Route::get('ws/contacts', 'Api\WSController@contacts');
+Route::get('ws/chat_history', 'Api\WSController@chatHistory');
+Route::post('ws/chat', 'Api\WSController@chat');
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });

@@ -245,12 +245,10 @@ class PassportController extends Controller
     }
 
     /**
-     * @api {post} /api/passport/logout 4. User Logout API
-     * @apiName 4. User Logout API
+     * @api {post} /api/passport/logout 4. General Logout API
+     * @apiName 4. General Logout API
      * @apiGroup Passport
      * @apiVersion 0.1.0
-     *
-     * @apiParam {String} type User type: {teacher | student}.
      *
      * @apiHeader {String} Accept application/json.
      * @apiHeader {String} Authorization Bearer Token.
@@ -273,23 +271,13 @@ class PassportController extends Controller
      * @apiErrorExample Error-Response:
      *     HTTP/1.1 401 Unauthorized
      *     {
-     *       "message": "some validation error."
+     *       "message": "Unauthenticated."
      *     }
      *
      */
     public function logout(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'type' => 'required|in:teacher,student',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'message' => $validator->errors(),
-            ], self::STATUS_UNAUTHORIZED);
-        }
-
-        if (request('type') == 'teacher' && Auth::guard('user-api')->check()) {
+        if (Auth::guard('user-api')->check()) {
             $user = Auth::guard('user-api')->user();
             Token::query()
                 ->where('user_id', $user->id)
@@ -297,7 +285,7 @@ class PassportController extends Controller
                 ->update([
                     'revoked' => true,
                 ]);
-        } else if (request('type') == 'student' && Auth::guard('student-api')->check()) {
+        } else if (Auth::guard('student-api')->check()) {
             $student = Auth::guard('student-api')->user();
             Token::query()
                 ->where('user_id', $student->id)
@@ -305,6 +293,10 @@ class PassportController extends Controller
                 ->update([
                     'revoked' => true,
                 ]);
+        } else {
+            return response()->json([
+                'message' => 'Unauthenticated.',
+            ], self::STATUS_UNAUTHORIZED);
         }
 
         $request->session()->invalidate();

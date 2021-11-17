@@ -3,7 +3,7 @@
 // $ heroku addons:create heroku-postgresql:hobby-dev
 // for heroku-postgresql connecting with laravel
 // $DATABASE_URL = parse_url(env("DATABASE_URL"));
-$DATABASE_URL = parse_url(getenv("DATABASE_URL"));
+// $DATABASE_URL = parse_url(getenv("DATABASE_URL"));
 
 return [
 
@@ -18,9 +18,9 @@ return [
     |
     */
 
-    // 'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => env('DB_CONNECTION', 'mysql'),
     // 'default' => env('DB_CONNECTION', 'pgsql'),
-    'default' => 'pgsql',
+    // 'default' => 'pgsql',
 
     /*
     |--------------------------------------------------------------------------
