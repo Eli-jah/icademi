@@ -20,7 +20,7 @@ class Cors
         header('Access-Control-Allow-Origin: *');
         header('Access-Control-Allow-Methods: GET,POST,OPTIONS,DELETE,PUT,PATCH');
         header('Access-Control-Allow-Credentials: true');
-        header('Access-Control-Allow-Headers: DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization');
+        header('Access-Control-Allow-Headers: Access-Control-Allow-Origin,DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization');
 
         return $next($request);
     }
