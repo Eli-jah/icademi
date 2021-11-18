@@ -91,80 +91,64 @@
         <h4>Welcome to Icademi!</h4>
 
         <h5>URLs:</h5>
-        <ul>
-            <li>
-                Web:
-                <a href="https://icademi.herokuapp.com/">https://icademi.herokuapp.com/</a>
-            </li>
-            <li>
-                Apidoc:
-                <a href="https://icademi.herokuapp.com/apidoc/index.html">https://icademi.herokuapp.com/apidoc/index.html</a>
-            </li>
-            <li>
-                Admin:(admin@admin)
-                <a href="https://icademi.herokuapp.com/admin/">https://icademi.herokuapp.com/admin</a>
-            </li>
-        </ul>
+        <div>
+            <p>
+                Web: <a href="https://icademi.herokuapp.com/">https://icademi.herokuapp.com/</a>
+            </p>
+            <p>
+                Apidoc: <a href="https://icademi.herokuapp.com/apidoc/index.html">https://icademi.herokuapp.com/apidoc/index.html</a>
+            </p>
+            <p>
+                Admin:(admin@admin) <a href="https://icademi.herokuapp.com/admin/">https://icademi.herokuapp.com/admin</a>
+            </p>
+        </div>
 
         <h5>Teachers:</h5>
-        <ul>
-            <li>
-                <p>Account: teacher-email-1@test.com</p>
-                <p>Password: Qwerty123456</p>
-            </li>
-            <li>
-                <p>Account: teacher-email-2@test.com</p>
-                <p>Password: Qwerty123456</p>
-            </li>
-            <li>
-                <p>Account: teacher-email-3@test.com</p>
-                <p>Password: Qwerty123456</p>
-            </li>
-            <li>
-                <p>Account: teacher-email-4@test.com</p>
-                <p>Password: Qwerty123456</p>
-            </li>
-            <li>
-                <p>Account: teacher-email-5@test.com</p>
-                <p>Password: Qwerty123456</p>
-            </li>
-            <li>
-                <p>Account: teacher-email-6@test.com</p>
-                <p>Password: Qwerty123456</p>
-            </li>
-            <li>
-                <p>Account: elijah-wang@outlook.com</p>
-                <p>Password: Qwerty123456</p>
-            </li>
-        </ul>
+        <div>
+            <p>
+                <span>Account: teacher-email-1@test.com || Password: Qwerty123456</span>
+            </p>
+            <p>
+                <span>Account: teacher-email-2@test.com || Password: Qwerty123456</span>
+            </p>
+            <p>
+                <span>Account: teacher-email-3@test.com || Password: Qwerty123456</span>
+            </p>
+            <p>
+                <span>Account: teacher-email-4@test.com || Password: Qwerty123456</span>
+            </p>
+            <p>
+                <span>Account: teacher-email-5@test.com || Password: Qwerty123456</span>
+            </p>
+            <p>
+                <span>Account: teacher-email-6@test.com || Password: Qwerty123456</span>
+            </p>
+            <p>
+                <span>Account: elijah-wang@outlook.com || Password: Qwerty123456</span>
+            </p>
+        </div>
 
         <h5>Students:</h5>
-        <ul>
-            <li>
-                <p>Account: student-email-1@test.com</p>
-                <p>Password: Qwerty123456</p>
-            </li>
-            <li>
-                <p>Account: student-email-2@test.com</p>
-                <p>Password: Qwerty123456</p>
-            </li>
-            <li>
-                <p>Account: student-email-3@test.com</p>
-                <p>Password: Qwerty123456</p>
-            </li>
-            <li>
-                <p>Account: student-email-4@test.com</p>
-                <p>Password: Qwerty123456</p>
-            </li>
-            <li>
-                <p>Account: student-email-5@test.com</p>
-                <p>Password: Qwerty123456</p>
-            </li>
-            <li>
-                <p>Account: student-email-6@test.com</p>
-                <p>Password: Qwerty123456</p>
-            </li>
-        </ul>
+        <div>
+            <p>
+                <span>Account: student-email-1@test.com || Password: Qwerty123456</span>
+            </p>
+            <p>
+                <span>Account: student-email-2@test.com || Password: Qwerty123456</span>
+            </p>
+            <p>
+                <span>Account: student-email-3@test.com || Password: Qwerty123456</span>
+            </p>
+            <p>
+                <span>Account: student-email-4@test.com || Password: Qwerty123456</span>
+            </p>
+            <p>
+                <span>Account: student-email-5@test.com || Password: Qwerty123456</span>
+            </p>
+            <p>
+                <span>Account: student-email-6@test.com || Password: Qwerty123456</span>
+            </p>
+        </div>
 
         <div class="links">
             <a href="https://laravel.com/docs">Documentation</a>
