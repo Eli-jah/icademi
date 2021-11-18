@@ -305,7 +305,7 @@ class PassportController extends Controller
             ], self::STATUS_UNAUTHORIZED);
         }
 
-        $request->session()->invalidate();
+        // $request->session()->invalidate();
 
         return response()->json([
             'message' => 'OK.',
