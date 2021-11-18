@@ -99,7 +99,20 @@
                 Apidoc: <a href="https://icademi.herokuapp.com/apidoc/index.html">https://icademi.herokuapp.com/apidoc/index.html</a>
             </p>
             <p>
-                Admin:(admin@admin) <a href="https://icademi.herokuapp.com/admin/">https://icademi.herokuapp.com/admin</a>
+                Admin:(admin@admin) <a href="https://icademi.herokuapp.com/admin/">https://icademi.herokuapp.com/admin/</a>
+            </p>
+            <p>
+                Websocket Chat: <a href="https://icademi-chat.herokuapp.com/">https://icademi-chat.herokuapp.com/</a>
+            </p>
+        </div>
+
+        <h5>GitHub Repositories:</h5>
+        <div>
+            <p>
+                icademi: <a href="https://github.com/Eli-jah/icademi">https://github.com/Eli-jah/icademi</a>
+            </p>
+            <p>
+                icademi-chat: <a href="https://github.com/Eli-jah/icademi-chat">https://github.com/Eli-jah/icademi-chat</a>
             </p>
         </div>
 
