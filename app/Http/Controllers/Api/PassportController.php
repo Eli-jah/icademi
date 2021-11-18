@@ -146,6 +146,9 @@ class PassportController extends Controller
             $data['type'] = 'teacher';
             $data['token'] = $user->createToken('icademi-teacher')->accessToken;
             $data['ws_token'] = Str::random(32);
+            $user->update([
+                'ws_token' => $data['ws_token'],
+            ]);
             return response()->json([
                 'data' => $data,
             ], self::STATUS_SUCCESS);
@@ -156,6 +159,9 @@ class PassportController extends Controller
             $data['type'] = 'student';
             $data['token'] = $student->createToken('icademi-student')->accessToken;
             $data['ws_token'] = Str::random(32);
+            $student->update([
+                'ws_token' => $data['ws_token'],
+            ]);
             return response()->json([
                 'data' => $data,
             ], self::STATUS_SUCCESS);
@@ -285,6 +291,9 @@ class PassportController extends Controller
     {
         if (Auth::guard('user-api')->check()) {
             $user = Auth::guard('user-api')->user();
+            $user->update([
+                'ws_token' => '',
+            ]);
             Token::query()
                 ->where('user_id', $user->id)
                 ->where('name', 'icademi-teacher')
@@ -293,6 +302,9 @@ class PassportController extends Controller
                 ]);
         } else if (Auth::guard('student-api')->check()) {
             $student = Auth::guard('student-api')->user();
+            $student->update([
+                'ws_token' => '',
+            ]);
             Token::query()
                 ->where('user_id', $student->id)
                 ->where('name', 'icademi-student')

@@ -16,18 +16,18 @@ use Illuminate\Support\Facades\Validator;
 class WSController extends Controller
 {
     /**
-     * @api {get} /api/ws/contacts 1. Contact List API
+     * @api {post} /api/ws/contacts 1. Contact List API
      * @apiName 1. Contact List API
      * @apiGroup Websocket
      * @apiVersion 0.1.0
      *
+     * @apiParam {String} ws_token Websocket Token.
+     *
      * @apiHeader {String} Accept application/json.
-     * @apiHeader {String} Authorization Bearer Token.
      *
      * @apiHeaderExample {json} Header-Example:
      *     {
      *       "Accept": "application/json",
-     *       "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjE2ZjBhNTFjZWI5ZmViZWRmYjQ4MmNjNTkwNjMyNDIzZTJlNDc0ZDY1ZTFjYjUyNzFjODQ1Y2Y2NWU4NDNlMWUwN2FkOTQ3NmJhYjU3YjQwIn0.eyJhdWQiOiIxIiwianRpIjoiMTZmMGE1MWNlYjlmZWJlZGZiNDgyY2M1OTA2MzI0MjNlMmU0NzRkNjVlMWNiNTI3MWM4NDVjZjY1ZTg0M2UxZTA3YWQ5NDc2YmFiNTdiNDAiLCJpYXQiOjE2MzU4MjE4NDUsIm5iZiI6MTYzNTgyMTg0NSwiZXhwIjoxNjY3MzU3ODQ1LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.w1iPsCps7xrxbgN63aR0VQT9r86pBJz9uW3ahQURUreLsbEeV-QBYMq3PWkleKyRClTS2MxQ845zjvPZ5U2JdoJTCV1hBRp501hxbbWLAfhoFwPDtE6xs0I15Cnqu8NNB0BC0_YkSSpeogUl7Z88llHyRi36_6srl5qizZ14oxmuzLSpjQm0zIj6UGkGe3BW0eSSQte_LBZ_-p1DLrtvoB_9dXN4qs8x9IoXbcP-awMawkHp7BNsHHDZV1CEOTjzR3fkmPnLYfrgC-tBmmwEhCYvA2c5u31Kp_7bAVP1YxP-wX5twSi1fYhU_iZxS0eYf6nPY6Pmob42SCpAvb1IvcUPNg9i9krMjlOrhCUifkbM1P9agNrWpOLQSC8NBYrj2jCSvxG-1hw1u2GccW1YzF1V2kERQBamL_i06JgPXVDsRLRwZXKtBnDmYl3ZVjlgPpM4_SrLvRKgJPVAmsZBpFWF25rxtK4VShvdsK9vKxxUIhpx1-PYwIpjH7N6d3rK19PiVCM_b5X6MqhNcGNmbsK7SvtiwqHZkF7NEDjNPiPahe_ucFgZwAeKHpnDyUoHDVMQgI9CVR9xa0zPY5WNEmmEGlQtmGmTfmAXL-QknPtV_kGNGjvPwHWXQAYIflJT8Sk31BeO95uQVKybbPjwBdt6e7vWWUQveh-XaqcyCIw"
      *     }
      *
      * @apiSuccess {Json} response Json response.
@@ -63,9 +63,21 @@ class WSController extends Controller
      */
     public function contacts(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'ws_token' => 'required|string',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => $validator->errors(),
+            ], self::STATUS_UNAUTHORIZED);
+        }
+
         $data = [];
-        if (Auth::guard('user-api')->check()) {
-            $user = Auth::guard('user-api')->user();
+        $ws_token = $request->input('ws_token');
+        // if (Auth::guard('user-api')->check()) {
+        // $user = Auth::guard('user-api')->user();
+        if ($user = User::query()->where('ws_token', $ws_token)->first()) {
             $school_ids = SchoolUser::query()
                 ->select('school_id')
                 ->where('user_id', $user->id)
@@ -77,8 +89,9 @@ class WSController extends Controller
                     ->get()
                     ->toArray();
             }
-        } else if (Auth::guard('student-api')->check()) {
-            $student = Auth::guard('student-api')->user();
+            // } else if (Auth::guard('student-api')->check()) {
+            // $student = Auth::guard('student-api')->user();
+        } else if ($student = Student::query()->where('ws_token', $ws_token)->first()) {
             $user_ids = SchoolUser::query()
                 ->select('user_id')
                 ->where('school_id', $student->school_id)
@@ -102,20 +115,19 @@ class WSController extends Controller
     }
 
     /**
-     * @api {get} /api/ws/chat_history 2. Chat History API
+     * @api {post} /api/ws/chat_history 2. Chat History API
      * @apiName 2. Chat History API
      * @apiGroup Websocket
      * @apiVersion 0.1.0
      *
+     * @apiParam {String} ws_token Websocket Token.
      * @apiParam {Integer} contact_id Contact's unique ID.
      *
      * @apiHeader {String} Accept application/json.
-     * @apiHeader {String} Authorization Bearer Token.
      *
      * @apiHeaderExample {json} Header-Example:
      *     {
      *       "Accept": "application/json",
-     *       "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjE2ZjBhNTFjZWI5ZmViZWRmYjQ4MmNjNTkwNjMyNDIzZTJlNDc0ZDY1ZTFjYjUyNzFjODQ1Y2Y2NWU4NDNlMWUwN2FkOTQ3NmJhYjU3YjQwIn0.eyJhdWQiOiIxIiwianRpIjoiMTZmMGE1MWNlYjlmZWJlZGZiNDgyY2M1OTA2MzI0MjNlMmU0NzRkNjVlMWNiNTI3MWM4NDVjZjY1ZTg0M2UxZTA3YWQ5NDc2YmFiNTdiNDAiLCJpYXQiOjE2MzU4MjE4NDUsIm5iZiI6MTYzNTgyMTg0NSwiZXhwIjoxNjY3MzU3ODQ1LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.w1iPsCps7xrxbgN63aR0VQT9r86pBJz9uW3ahQURUreLsbEeV-QBYMq3PWkleKyRClTS2MxQ845zjvPZ5U2JdoJTCV1hBRp501hxbbWLAfhoFwPDtE6xs0I15Cnqu8NNB0BC0_YkSSpeogUl7Z88llHyRi36_6srl5qizZ14oxmuzLSpjQm0zIj6UGkGe3BW0eSSQte_LBZ_-p1DLrtvoB_9dXN4qs8x9IoXbcP-awMawkHp7BNsHHDZV1CEOTjzR3fkmPnLYfrgC-tBmmwEhCYvA2c5u31Kp_7bAVP1YxP-wX5twSi1fYhU_iZxS0eYf6nPY6Pmob42SCpAvb1IvcUPNg9i9krMjlOrhCUifkbM1P9agNrWpOLQSC8NBYrj2jCSvxG-1hw1u2GccW1YzF1V2kERQBamL_i06JgPXVDsRLRwZXKtBnDmYl3ZVjlgPpM4_SrLvRKgJPVAmsZBpFWF25rxtK4VShvdsK9vKxxUIhpx1-PYwIpjH7N6d3rK19PiVCM_b5X6MqhNcGNmbsK7SvtiwqHZkF7NEDjNPiPahe_ucFgZwAeKHpnDyUoHDVMQgI9CVR9xa0zPY5WNEmmEGlQtmGmTfmAXL-QknPtV_kGNGjvPwHWXQAYIflJT8Sk31BeO95uQVKybbPjwBdt6e7vWWUQveh-XaqcyCIw"
      *     }
      *
      * @apiSuccess {Json} response Json response.
@@ -148,6 +160,7 @@ class WSController extends Controller
     public function chatHistory(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'ws_token' => 'required|string',
             'contact_id' => 'required|integer',
         ]);
 
@@ -158,15 +171,18 @@ class WSController extends Controller
         }
 
         $data = [];
+        $ws_token = $request->input('ws_token');
         $contact_id = $request->input('contact_id');
-        if (Auth::guard('user-api')->check()) {
-            $user = Auth::guard('user-api')->user();
+        // if (Auth::guard('user-api')->check()) {
+        // $user = Auth::guard('user-api')->user();
+        if ($user = User::query()->where('ws_token', $ws_token)->first()) {
             $conversation = Conversation::query()
                 ->where('user_id', $user->id)
                 ->where('student_id', $contact_id)
                 ->first();
-        } else if (Auth::guard('student-api')->check()) {
-            $student = Auth::guard('student-api')->user();
+            // } else if (Auth::guard('student-api')->check()) {
+            // $student = Auth::guard('student-api')->user();
+        } else if ($student = Student::query()->where('ws_token', $ws_token)->first()) {
             $conversation = Conversation::query()
                 ->where('user_id', $contact_id)
                 ->where('student_id', $student->id)
@@ -195,16 +211,15 @@ class WSController extends Controller
      * @apiGroup Websocket
      * @apiVersion 0.1.0
      *
+     * @apiParam {String} ws_token Websocket Token.
      * @apiParam {Integer} contact_id Contact's unique ID.
-     * @apiParam {String} content chat message content.
+     * @apiParam {String} content Chat message content.
      *
      * @apiHeader {String} Accept application/json.
-     * @apiHeader {String} Authorization Bearer Token.
      *
      * @apiHeaderExample {json} Header-Example:
      *     {
      *       "Accept": "application/json",
-     *       "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjE2ZjBhNTFjZWI5ZmViZWRmYjQ4MmNjNTkwNjMyNDIzZTJlNDc0ZDY1ZTFjYjUyNzFjODQ1Y2Y2NWU4NDNlMWUwN2FkOTQ3NmJhYjU3YjQwIn0.eyJhdWQiOiIxIiwianRpIjoiMTZmMGE1MWNlYjlmZWJlZGZiNDgyY2M1OTA2MzI0MjNlMmU0NzRkNjVlMWNiNTI3MWM4NDVjZjY1ZTg0M2UxZTA3YWQ5NDc2YmFiNTdiNDAiLCJpYXQiOjE2MzU4MjE4NDUsIm5iZiI6MTYzNTgyMTg0NSwiZXhwIjoxNjY3MzU3ODQ1LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.w1iPsCps7xrxbgN63aR0VQT9r86pBJz9uW3ahQURUreLsbEeV-QBYMq3PWkleKyRClTS2MxQ845zjvPZ5U2JdoJTCV1hBRp501hxbbWLAfhoFwPDtE6xs0I15Cnqu8NNB0BC0_YkSSpeogUl7Z88llHyRi36_6srl5qizZ14oxmuzLSpjQm0zIj6UGkGe3BW0eSSQte_LBZ_-p1DLrtvoB_9dXN4qs8x9IoXbcP-awMawkHp7BNsHHDZV1CEOTjzR3fkmPnLYfrgC-tBmmwEhCYvA2c5u31Kp_7bAVP1YxP-wX5twSi1fYhU_iZxS0eYf6nPY6Pmob42SCpAvb1IvcUPNg9i9krMjlOrhCUifkbM1P9agNrWpOLQSC8NBYrj2jCSvxG-1hw1u2GccW1YzF1V2kERQBamL_i06JgPXVDsRLRwZXKtBnDmYl3ZVjlgPpM4_SrLvRKgJPVAmsZBpFWF25rxtK4VShvdsK9vKxxUIhpx1-PYwIpjH7N6d3rK19PiVCM_b5X6MqhNcGNmbsK7SvtiwqHZkF7NEDjNPiPahe_ucFgZwAeKHpnDyUoHDVMQgI9CVR9xa0zPY5WNEmmEGlQtmGmTfmAXL-QknPtV_kGNGjvPwHWXQAYIflJT8Sk31BeO95uQVKybbPjwBdt6e7vWWUQveh-XaqcyCIw"
      *     }
      *
      * @apiSuccess {Json} response Json response.
@@ -228,6 +243,7 @@ class WSController extends Controller
     public function chat(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'ws_token' => 'required|string',
             'contact_id' => 'required|integer',
             'content' => 'required|string',
         ]);
@@ -238,14 +254,17 @@ class WSController extends Controller
             ], self::STATUS_UNAUTHORIZED);
         }
 
+        // $data = [];
+        $ws_token = $request->input('ws_token');
         $contact_id = $request->input('contact_id');
         $data = [
             'sender_id' => $contact_id,
             'content' => $request->input('content'),
         ];
-        if (Auth::guard('user-api')->check()) {
+        // if (Auth::guard('user-api')->check()) {
+        // $user = Auth::guard('user-api')->user();
+        if ($user = User::query()->where('ws_token', $ws_token)->first()) {
             $data['sender_type'] = Message::SENDER_TYPE_TEACHER;
-            $user = Auth::guard('user-api')->user();
             $school_ids = SchoolUser::query()
                 ->select('school_id')
                 ->where('user_id', $user->id)
@@ -266,9 +285,10 @@ class WSController extends Controller
                     'user_id' => $user->id,
                     'student_id' => $contact_id,
                 ]);
-        } else if (Auth::guard('student-api')->check()) {
+            // } else if (Auth::guard('student-api')->check()) {
+            // $student = Auth::guard('student-api')->user();
+        } else if ($student = Student::query()->where('ws_token', $ws_token)->first()) {
             $data['sender_type'] = Message::SENDER_TYPE_STUDENT;
-            $student = Auth::guard('student-api')->user();
             $user_ids = SchoolUser::query()
                 ->select('user_id')
                 ->where('school_id', $student->school_id)
