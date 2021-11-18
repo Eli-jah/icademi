@@ -299,11 +299,11 @@ class PassportController extends Controller
                 ->update([
                     'revoked' => true,
                 ]);
-        } /*else {
+        } else {
             return response()->json([
                 'message' => 'Unauthenticated.',
             ], self::STATUS_UNAUTHORIZED);
-        }*/
+        }
 
         // $request->session()->invalidate();
 
