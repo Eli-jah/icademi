@@ -18,7 +18,7 @@
             color: #636b6f;
             font-family: 'Raleway', sans-serif;
             font-weight: 100;
-            height: 100vh;
+            /*height: 100vh;*/
             margin: 0;
         }
 
@@ -71,7 +71,8 @@
 
 </head>
 <body>
-<div class="flex-center position-ref full-height">
+{{--<div class="flex-center position-ref full-height">--}}
+<div class="flex-center position-ref">
     @if (Route::has('login'))
         <div class="top-right links">
             @auth
@@ -135,9 +136,6 @@
             </p>
             <p>
                 <span>Account: teacher-email-6@test.com || Password: Qwerty123456</span>
-            </p>
-            <p>
-                <span>Account: elijah-wang@outlook.com || Password: Qwerty123456</span>
             </p>
         </div>
 
