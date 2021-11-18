@@ -34,6 +34,7 @@ class WSController extends Controller
      * @apiSuccess {Json} response.data Json response data.
      * @apiSuccess {Integer} response.data.id Contact's unique ID.
      * @apiSuccess {String} response.data.name Contact's name.
+     * @apiSuccess {String} response.data.type Contact's type.
      *
      * @apiSuccessExample Success-Response:
      *     HTTP/1.1 200 OK
@@ -41,15 +42,18 @@ class WSController extends Controller
      *       "data": [
      *         {
      *           "id": 1,
-     *           "name": "student-no-1"
+     *           "name": "student-no-1",
+     *           "type": "student"
      *         },
      *         {
      *           "id": 2,
-     *           "name": "student-no-2"
+     *           "name": "student-no-2",
+     *           "type": "student"
      *         },
      *         {
      *           "id": 3,
-     *           "name": "student-no-3"
+     *           "name": "student-no-3",
+     *           "type": "student"
      *         }
      *       ]
      *     }
@@ -140,10 +144,12 @@ class WSController extends Controller
      *     {
      *       "data": [
      *         {
+     *           "sender_name": "elijah",
      *           "content": "hello, world.",
      *           "created_at": "2021-11-17 03:47:07"
      *         },
      *         {
+     *           "sender_name": "elijah-wang",
      *           "content": "hello, kitty.",
      *           "created_at": "2021-11-17 04:01:23"
      *         }
@@ -195,8 +201,8 @@ class WSController extends Controller
 
         if (isset($conversation) && !empty($conversation)) {
             $data = Message::query()
-                ->select('content', 'created_at')
                 ->where('conversation_id', $conversation->id)
+                ->limit(20)
                 ->get();
         }
 
@@ -264,6 +270,7 @@ class WSController extends Controller
         // if (Auth::guard('user-api')->check()) {
         // $user = Auth::guard('user-api')->user();
         if ($user = User::query()->where('ws_token', $ws_token)->first()) {
+            $data['sender_name'] = $user->name;
             $data['sender_type'] = Message::SENDER_TYPE_TEACHER;
             $school_ids = SchoolUser::query()
                 ->select('school_id')
@@ -288,6 +295,7 @@ class WSController extends Controller
             // } else if (Auth::guard('student-api')->check()) {
             // $student = Auth::guard('student-api')->user();
         } else if ($student = Student::query()->where('ws_token', $ws_token)->first()) {
+            $data['sender_name'] = $student->name;
             $data['sender_type'] = Message::SENDER_TYPE_STUDENT;
             $user_ids = SchoolUser::query()
                 ->select('user_id')

@@ -20,6 +20,7 @@ class CreateMessagesTable extends Migration
             $table->foreign('conversation_id')->references('id')->on('conversations')->onDelete('cascade');
 
             $table->unsignedInteger('sender_id')->nullable(false);
+            $table->string('sender_name')->nullable(false)->comment('sender name');
             $table->string('sender_type')->nullable(false)->default('teacher')->comment('sender type: teacher | student');
 
             $table->string('content')->nullable(true)->comment('text content');
