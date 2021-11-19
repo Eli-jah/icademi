@@ -110,10 +110,10 @@
         <h5>GitHub Repositories:</h5>
         <div>
             <p>
-                icademi: <a href="https://github.com/Eli-jah/icademi">https://github.com/Eli-jah/icademi</a>
+                icademi: <a href="https://github.com/Eli-jah/icademi">https://github.com/Eli-jah/icademi</a> (branch: heroku)
             </p>
             <p>
-                icademi-chat: <a href="https://github.com/Eli-jah/icademi-chat">https://github.com/Eli-jah/icademi-chat</a>
+                icademi-chat: <a href="https://github.com/Eli-jah/icademi-chat">https://github.com/Eli-jah/icademi-chat</a> (branch: heroku)
             </p>
         </div>
 
