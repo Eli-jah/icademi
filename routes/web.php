@@ -11,9 +11,10 @@
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
-});
+});*/
+Route::get('/', 'IndexController@index')->name('welcome');
 
 Auth::routes();
 // vendor/laravel/framework/src/Illuminate/Routing/Router.php Line: 1122~1135
