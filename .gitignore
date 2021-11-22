@@ -27,3 +27,13 @@ Homestead.json
 /.idea
 /.DS_Store
 
+.gitignore.bak
+docker-compose.*
+*.dockerfile
+generate_passport_key.sh
+package.json.bak
+package.json.save
+webpack.mix.js.bak
+webpack.mix.js.save
+yarn.lock.bak
+yarn.lock.save
