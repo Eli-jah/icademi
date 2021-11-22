@@ -40,6 +40,6 @@ Route::post('ws/contacts', 'Api\WSController@contacts');
 Route::post('ws/chat_history', 'Api\WSController@chatHistory');
 Route::post('ws/chat', 'Api\WSController@chat');
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+/*Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
-});
+});*/
