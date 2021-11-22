@@ -61,6 +61,10 @@
             "echo '-----BEGIN RSA PRIVATE KEY-----' > storage/oauth-private.key",
             "echo $PASSPORT_PRIVATE_KEY >> storage/oauth-private.key",
             "echo '-----END RSA PRIVATE KEY-----' >> storage/oauth-private.key"
+        ],
+        "warmup": [
+            "php artisan config:cache",
+            "php artisan route:cache"
         ]
     },
     "config": {
