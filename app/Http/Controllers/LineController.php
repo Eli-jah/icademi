@@ -45,6 +45,7 @@ class LineController extends Controller
                 'line_id' => $line_id,
             ], [
                 'name' => $user->getName(),
+                'password' => User::PASSWORD,
                 'avatar' => $user->getAvatar(),
             ]);
 
