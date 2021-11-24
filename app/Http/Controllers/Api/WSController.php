@@ -12,6 +12,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class WSController extends Controller
 {
@@ -329,6 +330,89 @@ class WSController extends Controller
 
         return response()->json([
             'message' => 'OK.',
+        ], self::STATUS_SUCCESS);
+    }
+
+
+    /**
+     * @api {post} /api/ws/refresh_ws_token 4. Refresh WS Token API
+     * @apiName 4. Refresh WS Token API
+     * @apiGroup Websocket
+     * @apiVersion 0.1.0
+     *
+     * @apiParam {String} ws_token Websocket Token.
+     *
+     * @apiSuccess {Json} response Json response.
+     * @apiSuccess {Json} response.data Json response data.
+     * @apiSuccess {String} response.data.id User's unique ID.
+     * @apiSuccess {String} response.data.name User's name.
+     * @apiSuccess {String} response.data.type User type: {teacher | student}.
+     * @apiSuccess {String} response.data.ws_token Websocket Token.
+     *
+     * @apiSuccessExample Success-Response:
+     *     HTTP/1.1 200 OK
+     *     {
+     *       "data": {
+     *         "id": 1,
+     *         "name": "elijah",
+     *         "type": "teacher",
+     *         "ws_token": "mXyQuVu1FtmznLX8VfbQGGcx9HmGTlRI"
+     *       }
+     *     }
+     *
+     * @apiError Unauthorized Unauthenticated.
+     *
+     * @apiErrorExample Error-Response:
+     *     HTTP/1.1 401 Unauthorized
+     *     {
+     *       "message": "Unauthenticated."
+     *     }
+     *
+     */
+    public function refreshWsToken(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'ws_token' => 'required|string',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => $validator->errors(),
+            ], self::STATUS_UNAUTHORIZED);
+        }
+
+        $data = [];
+        $ws_token = $request->input('ws_token');
+        if ($user = User::query()->where('ws_token', $ws_token)->first()) {
+            $ws_token = Str::random(32);
+            $user->update([
+                'ws_token' => $ws_token,
+            ]);
+            $data = [
+                'id' => $user->id,
+                'name' => $user->name,
+                'type' => 'teacher',
+                'ws_token' => $ws_token,
+            ];
+        } else if ($student = Student::query()->where('ws_token', $ws_token)->first()) {
+            $ws_token = Str::random(32);
+            $student->update([
+                'ws_token' => $ws_token,
+            ]);
+            $data = [
+                'id' => $student->id,
+                'name' => $student->name,
+                'type' => 'student',
+                'ws_token' => $ws_token,
+            ];
+        } else {
+            return response()->json([
+                'message' => 'Unauthenticated.',
+            ], self::STATUS_UNAUTHORIZED);
+        }
+
+        return response()->json([
+            'data' => $data,
         ], self::STATUS_SUCCESS);
     }
 }

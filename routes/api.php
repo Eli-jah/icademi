@@ -39,6 +39,7 @@ Route::group(['middleware' => 'auth:student-api'], function () {
 Route::post('ws/contacts', 'Api\WSController@contacts');
 Route::post('ws/chat_history', 'Api\WSController@chatHistory');
 Route::post('ws/chat', 'Api\WSController@chat');
+Route::post('ws/refresh_ws_token', 'Api\WSController@refreshWsToken');
 
 /*Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

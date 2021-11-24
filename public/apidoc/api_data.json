@@ -1982,5 +1982,102 @@
     },
     "filename": "app/Http/Controllers/Api/WSController.php",
     "groupTitle": "Websocket"
+  },
+  {
+    "type": "post",
+    "url": "/api/ws/refresh_ws_token",
+    "title": "4. Refresh WS Token API",
+    "name": "4._Refresh_WS_Token_API",
+    "group": "Websocket",
+    "version": "0.1.0",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "ws_token",
+            "description": "<p>Websocket Token.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Json",
+            "optional": false,
+            "field": "response",
+            "description": "<p>Json response.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Json",
+            "optional": false,
+            "field": "response.data",
+            "description": "<p>Json response data.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "response.data.id",
+            "description": "<p>User's unique ID.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "response.data.name",
+            "description": "<p>User's name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "response.data.type",
+            "description": "<p>User type: {teacher | student}.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "response.data.ws_token",
+            "description": "<p>Websocket Token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"data\": {\n    \"id\": 1,\n    \"name\": \"elijah\",\n    \"type\": \"teacher\",\n    \"ws_token\": \"mXyQuVu1FtmznLX8VfbQGGcx9HmGTlRI\"\n  }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "Unauthorized",
+            "description": "<p>Unauthenticated.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"Unauthenticated.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/Http/Controllers/Api/WSController.php",
+    "groupTitle": "Websocket"
   }
 ]
