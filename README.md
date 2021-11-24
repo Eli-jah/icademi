@@ -293,6 +293,65 @@ composer remove hhxsv5/laravel-s
 
 #### Predis
 
-> composer require predis/predis
+```angular2html
+composer require predis/predis
+```
+
+#### Qr-Code
+
+```angular2html
+composer require simplesoftwareio/simple-qrcode
+```
+
+#### Line Login with Socialite
+
+1. Install
+```angular2html
+composer require laravel/socialite:^3.0
+
+composer require socialiteproviders/manager:^3.0
+
+composer require socialiteproviders/line:^2.0
+```
+
+2. Config
+```angular2html
+vi config/services.php
+
+'line' => [
+'client_id' => env('LINE_CLIENT_ID'),
+'client_secret' => env('LINE_CLIENT_SECRET'),
+'redirect' => env('LINE_REDIRECT_URI')
+],
+```
+
+3. Env
+```angular2html
+vi .env.example
+
+# for login via Line
+LINE_CLIENT_ID=
+LINE_CLIENT_SECRET=
+LINE_REDIRECT_URI=
+```
+
+4. Event Listener
+```angular2html
+vi app/Providers/EventServiceProvider.php
+
+protected $listen = [
+  ...
+  // for Login via LINE
+  \SocialiteProviders\Manager\SocialiteWasCalled::class => [
+    // add your listeners (aka providers) here
+    'SocialiteProviders\Line\LineExtendSocialite@handle',
+  ],
+];
+```
+
+5. Usage
+```angular2html
+return Socialite::driver('line')->redirect();
+```
 
 

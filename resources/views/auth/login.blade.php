@@ -60,6 +60,17 @@
                                 </a>
                             </div>
                         </div>
+
+                        <!-- for login via LINE -->
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <a href="{{ route('line.login') }}" class="btn btn-primary btn-block">
+                                    Login via LINE
+                                </a>
+                            </div>
+                        </div>
+                        <!-- for login via LINE -->
+
                     </form>
                 </div>
             </div>

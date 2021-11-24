@@ -16,6 +16,11 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\Event' => [
             'App\Listeners\EventListener',
         ],
+        // for Login via LINE
+        \SocialiteProviders\Manager\SocialiteWasCalled::class => [
+            // add your listeners (aka providers) here
+            'SocialiteProviders\Line\LineExtendSocialite@handle',
+        ],
     ];
 
     /**

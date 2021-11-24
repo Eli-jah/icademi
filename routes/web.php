@@ -16,6 +16,11 @@
 });*/
 Route::get('/', 'IndexController@index')->name('welcome');
 
+// for login via LINE
+Route::get('line/login', 'AuthController@redirect')->name('line.login');
+Route::get('line/callback', 'AuthController@callback')->name('line.callback');
+Route::get('line/qr_code', 'AuthController@qrCode')->name('line.qr_code');
+
 Auth::routes();
 // vendor/laravel/framework/src/Illuminate/Routing/Router.php Line: 1122~1135
 // Authentication Routes...
