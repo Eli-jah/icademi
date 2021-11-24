@@ -10,42 +10,46 @@ class LineController extends Controller
 {
     /**
      * Redirect current user request to the LINE authentication page.
-     *
      * Returned line user fields: id, name, avatar, email
      *
      * @return Response
      */
     public function login(Request $request)
     {
-        return Socialite::driver('line')->redirect();
+        return Socialite::driver('line')
+            ->setScopes([
+                'openid',
+                'profile',
+                // 'email',
+            ])
+            ->redirect();
     }
 
     /**
      * Get current user information from LINE.
-     *
      * Returned line user fields: id, name, avatar, email
-     *
-     * @return Response
      */
     public function callback(Request $request)
     {
-        $user = Socialite::driver('line')->user();
+        $user = Socialite::driver('line')
+            ->user();
         $line_id = $user->getId();
-        return view('qr_code')->with('line_id', $line_id);
+        return view('qr_code')
+            ->with('line_id', $line_id);
     }
 
     /**
      * Get current user QR Code from LINE.
-     *
-     * @return Response
      */
     public function qrCode(Request $request)
     {
-        $user = Socialite::driver('line')->user();
+        $user = Socialite::driver('line')
+            ->user();
 
         // dd($user);
         // $user->token;
         $line_id = $user->getId();
-        return view('qr_code')->with('line_id', $line_id);
+        return view('qr_code')
+            ->with('line_id', $line_id);
     }
 }
