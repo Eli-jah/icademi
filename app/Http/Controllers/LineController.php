@@ -17,11 +17,11 @@ class LineController extends Controller
     public function login(Request $request)
     {
         return Socialite::driver('line')
-            ->setScopes([
-                'openid',
-                'profile',
-                // 'email',
-            ])
+            // ->setScopes([
+            //     'openid',
+            //     'profile',
+            //     // 'email',
+            // ])
             ->redirect();
     }
 
