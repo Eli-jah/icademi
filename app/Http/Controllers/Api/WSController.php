@@ -333,7 +333,6 @@ class WSController extends Controller
         ], self::STATUS_SUCCESS);
     }
 
-
     /**
      * @api {post} /api/ws/refresh_ws_token 4. Refresh WS Token API
      * @apiName 4. Refresh WS Token API
