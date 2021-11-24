@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Log;
 use Laravel\Socialite\Facades\Socialite;
 
 class LineController extends Controller
@@ -33,6 +34,8 @@ class LineController extends Controller
     {
         $user = Socialite::driver('line')
             ->user();
+        Log::info('LINE user info:' . json_encode($user));
+        dd($user);
         $line_id = $user->getId();
         return view('qr_code')
             ->with('line_id', $line_id);
