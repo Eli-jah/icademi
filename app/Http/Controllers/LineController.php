@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
 
 class LineController extends Controller
@@ -45,7 +46,8 @@ class LineController extends Controller
                 'line_id' => $line_id,
             ], [
                 'name' => $user->getName(),
-                'password' => User::PASSWORD,
+                'email' => User::EMAIL . '-' . Str::random(12) . '@TEST.COM',
+                'password' => 'LINE_TEMP_' . User::PASSWORD,
                 'avatar' => $user->getAvatar(),
             ]);
 

@@ -10,6 +10,7 @@ class User extends Authenticatable
 {
     use HasApiTokens, Notifiable;
 
+    const EMAIL = 'TEMP_EMAIL';
     const PASSWORD = 'PASSWORD';
     public $type = 'teacher';
 
