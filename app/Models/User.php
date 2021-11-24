@@ -25,6 +25,7 @@ class User extends Authenticatable
         'random_code',
         'avatar',
         'ws_token',
+        'line_id',
         'remember_token',
     ];
 

@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 
 class LineController extends Controller
@@ -34,24 +35,21 @@ class LineController extends Controller
     {
         $user = Socialite::driver('line')
             ->user();
-        Log::info('LINE user info:' . json_encode($user));
-        dd($user);
-        $line_id = $user->getId();
-        return view('qr_code')
-            ->with('line_id', $line_id);
-    }
-
-    /**
-     * Get current user QR Code from LINE.
-     */
-    public function qrCode(Request $request)
-    {
-        $user = Socialite::driver('line')
-            ->user();
 
         // dd($user);
-        // $user->token;
+        // Log::info('LINE user info:' . json_encode($user));
         $line_id = $user->getId();
+        $line_user = User::query()
+            ->where('line_id', $line_id)
+            ->firstOrCreate([
+                'line_id' => $line_id,
+            ], [
+                'name' => $user->getName(),
+                'avatar' => $user->getAvatar(),
+            ]);
+
+        Auth::guard('web')->login($line_user);
+
         return view('qr_code')
             ->with('line_id', $line_id);
     }

@@ -65,12 +65,23 @@
 <body>
 <div class="flex-center position-ref full-height">
     <div>
-        <p>QR Code for Login via LINE:</p>
+        <p>QR Code for Current LINE User:</p>
     </div>
     <br>
     <div class="visible-print text-center">
         {!! \SimpleSoftwareIO\QrCode\Facades\QrCode::size(500)->generate( $line_id ); !!}
     </div>
+    @if (session('status'))
+        <div class="alert alert-success">
+            {{ session('status') }}
+        </div class="text-center">
+    @else
+        <div>
+            <a href="{{ route('home') }}" class="btn btn-primary btn-block">
+                Go to Home Page
+            </a>
+        </div>
+    @endif
 </div>
 </body>
 </html>

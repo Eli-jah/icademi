@@ -19,7 +19,6 @@ Route::get('/', 'IndexController@index')->name('welcome');
 // for login via LINE
 Route::get('line/login', 'LineController@login')->name('line.login');
 Route::get('line/callback', 'LineController@callback')->name('line.callback');
-Route::get('line/qr_code', 'LineController@qrCode')->name('line.qr_code');
 
 Auth::routes();
 // vendor/laravel/framework/src/Illuminate/Routing/Router.php Line: 1122~1135
