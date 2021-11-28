@@ -121,10 +121,10 @@ class SchoolsController extends Controller
         $teacher_id = $this->teacherId;
 
         if ($is_teacher) {
-            $grid->column('your_title', __('Your Title'))->display(function () use ($teacher_id) {
+            $grid->column('', __('Your Title'))->display(function () use ($teacher_id) {
                 return $teacher_id == $this->user_id ? 'Founder' : 'Teacher';
             });
-            $grid->column('student_management', __('Student Management'))->display(function () {
+            $grid->column('', __('Student Management'))->display(function () {
                 return '<a class="btn btn-xs btn-primary" style="margin-right:8px" href="' . route('admin.students.index', [
                         'school_id' => $this->id,
                     ]) . '">Student Management</a>';

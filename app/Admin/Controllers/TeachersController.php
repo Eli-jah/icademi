@@ -72,8 +72,8 @@ class TeachersController extends Controller
         });
 
         if ($is_teacher) {
-            $grid->column('', 'Send Email')->display(function () use ($is_teacher, $teacher_id) {
-                if ($is_teacher && $teacher_id != $this->id && !$this->is_a_school_founder) {
+            $grid->column('', 'Send Email')->display(function () use ($teacher_id) {
+                if ($teacher_id != $this->id && !$this->is_a_school_founder) {
                     return '<a class="btn btn-xs btn-primary" style="margin-right:8px" href="' . route('admin.invitations.create', [
                             'recipient_id' => $this->id,
                         ]) . '">Send Email</a>';

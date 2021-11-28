@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use App\Admin\Models\Teacher;
 use App\Models\School;
 use App\Models\SchoolUser;
 use App\Models\Student;
@@ -13,6 +14,7 @@ use Encore\Admin\Grid\Tools as GridTools;
 use Encore\Admin\Grid\Tools\BatchActions;
 use Encore\Admin\Show;
 use Encore\Admin\Show\Tools as ShowTools;
+use Illuminate\Support\Str;
 
 class StudentsController extends Controller
 {
@@ -35,6 +37,20 @@ class StudentsController extends Controller
     {
         $grid = new Grid(new Student());
 
+        $is_teacher = $this->isTeacher();
+        $teacher_id = $this->teacherId;
+        $ws_token = '';
+        if ($is_teacher) {
+            $teacher = Teacher::query()
+                ->find($teacher_id);
+            if (!$ws_token = $teacher->ws_token) {
+                $ws_token = Str::random(32);
+                $teacher->update([
+                    'ws_token' => $ws_token,
+                ]);
+            }
+        }
+
         if ($this->isAdministrator()) {
             // $grid->disableActions();
             // $grid->disableExport();
@@ -52,7 +68,7 @@ class StudentsController extends Controller
                     $batch->disableDelete();
                 });
             });
-        } else if ($this->isTeacher()) {
+        } else if ($is_teacher) {
             $this->schoolId = request()->input('school_id');
             if ($this->schoolId) {
                 $is_working_at_the_school = SchoolUser::query()
@@ -170,6 +186,12 @@ EOT;
         $grid->column('name', __('Name'));
         $grid->column('email', __('Email'))->copyable();
         $grid->column('avatar', __('Avatar'))->image('', 40);
+        if ($is_teacher) {
+            $grid->column('', __('Chat'))->display(function () use ($ws_token) {
+                return '<a class="btn btn-xs btn-primary" style="margin-right:8px" target="_blank" rel="noopener noreferrer"
+                 href="https://icademi-chat.herokuapp.com?ws_token=' . $ws_token . '&current_contact_tag=student-' . $this->id . '">Chat</a>';
+            });
+        }
         // $grid->column('password', __('Password'));
         // $grid->column('created_at', __('Created at'));
         // $grid->column('updated_at', __('Updated at'));
