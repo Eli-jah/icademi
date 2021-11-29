@@ -38,23 +38,27 @@
 
                             <div class="row">
                                 <h3>Schools</h3>
-                                @foreach ($schools as $school)
-                                    <p>School: {{ $school->name }}</p>
-                                @endforeach
+                                @if (count($schools) > 0)
+                                    @foreach ($schools as $school)
+                                        <p>School: {{ $school->name }}</p>
+                                    @endforeach
+                                @else
+                                    <p>There is No School Yet.</p>
+                                @endif
                             </div>
 
                             <div class="row">
                                 <h3>Students</h3>
                                 @if (count($students) > 0)
                                     @foreach ($students as $student)
-                                        {{--<p>Student: {{ $student->name }}</p>--}}
+                                        <p>Student: {{ $student->name }}</p>
                                         <a target="_blank" rel="noopener noreferrer"
                                            href="https://icademi-chat.herokuapp.com?ws_token={{ $user->ws_token }}&current_contact_tag=student-{{ $student->id }}">
                                             Chat
                                         </a>
                                     @endforeach
                                 @else
-                                    <p>There is No Students Yet.</p>
+                                    <p>There is No Student Yet.</p>
                                 @endif
                             </div>
                         @else
