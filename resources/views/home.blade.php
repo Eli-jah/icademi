@@ -55,7 +55,7 @@
                                 <a href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                    General Logout
+                                    Logout
                                 </a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST"
@@ -75,19 +75,6 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-heading">Dashboard</div>
-
-                    <div class="panel-body">
-                        <form class="form-horizontal" method="POST" action="{{ route('logout') }}">
-                            {{ csrf_field() }}
-                            <div class="form-group">
-                                <div class="col-md-8 col-md-offset-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        General Logout
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
 
                     <div class="panel-body">
                         @if (session('status'))
