@@ -110,11 +110,11 @@ class LoginController extends Controller
         // if (!$user = $this->guard()->user()) {
         //     $user = $this->guard('student-web')->user();
         // }
-
-        return $this->authenticated($request, $this->guard()->user())
-            ?: redirect()->intended($this->redirectPath());
         // return view('home', [
         //     'user' => $user,
         // ]);
+
+        return $this->authenticated($request, $this->guard()->user())
+            ?: redirect()->intended($this->redirectPath());
     }
 }

@@ -10,9 +10,6 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    protected $user = false;
-    protected $type = false;
-
     /**
      * Create a new controller instance.
      *
@@ -21,15 +18,6 @@ class HomeController extends Controller
     public function __construct()
     {
         // $this->middleware('auth');
-        if ($user = Auth::guard()->user()) {
-            $this->type = 'teacher';
-        } else if ($user = Auth::guard('student-web')->user()) {
-            $this->type = 'student';
-        }
-        if (!$user) {
-            return redirect()->route('login');
-        }
-        $this->user = $user;
     }
 
     /**
@@ -39,18 +27,18 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $user = false;
+        $type = false;
         if ($user = Auth::guard()->user()) {
-            $this->type = 'teacher';
+            $type = 'teacher';
         } else if ($user = Auth::guard('student-web')->user()) {
-            $this->type = 'student';
+            $type = 'student';
         }
         if (!$user) {
             return redirect()->route('login');
         }
-        $this->user = $user;
-        dd($user);
-        $user_id = $this->user->id;
-        if ($this->type == 'teacher') {
+        $user_id = $user->id;
+        if ($type == 'teacher') {
             $user = User::query()
                 ->with('founded_schools')
                 ->with('joined_schools')
@@ -86,7 +74,7 @@ class HomeController extends Controller
                 'schools' => $schools,
                 'students' => $students,
             ]);
-        } else if ($this->type == 'student') {
+        } else if ($type == 'student') {
             $user = Student::query()
                 ->with('school.teachers')
                 // ->with('followed_teachers')
