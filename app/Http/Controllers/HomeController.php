@@ -45,7 +45,7 @@ class HomeController extends Controller
                 ->with('fans_students')
                 ->find($user_id);
             $token = $user->createToken('icademi-teacher')->accessToken;
-            $schools = $user->joined_schools;
+            $schools = $user->joined_schools->toArray();
             $students = [];
             $student_ids = [];
             // $founded_school_ids = [];
@@ -59,7 +59,6 @@ class HomeController extends Controller
                     ->pluck('id')
                     ->toArray();
             }
-            dd($user->fans_students);
             $user->fans_students->each(function ($fans_student) use (&$student_ids) {
                 if (!in_array($fans_student->id, $student_ids)) {
                     $student_ids[] = $fans_student->id;
@@ -67,7 +66,8 @@ class HomeController extends Controller
             });
             if (count($student_ids) > 0) {
                 $students = Student::query()
-                    ->findMany($student_ids);
+                    ->findMany($student_ids)
+                    ->toArray();
             }
             return view('home', [
                 'user' => $user,
