@@ -202,10 +202,13 @@
                             // teacher_id: teacher_id,
                         })
                         .then(function (response) {
-                            console.log(response);
-                            teacher.setAttribute('data-is-followed', 'no');
-                            // teacher.innerText = 'Follow this teacher';
-                            teacher.textContent = 'Follow this teacher';
+                            // console.log(response);
+                            if (response.status == 200) {
+                                teacher.setAttribute('data-is-followed', 'no');
+                                // teacher.innerText = 'Follow this teacher';
+                                teacher.textContent = 'Follow this teacher';
+                                alert('You unfollowed this teacher successfully.');
+                            }
                         })
                         .catch(function (error) {
                             console.log(error);
@@ -216,10 +219,13 @@
                             // teacher_id: teacher_id,
                         })
                         .then(function (response) {
-                            console.log(response);
-                            teacher.setAttribute('data-is-followed', 'yes');
-                            // teacher.innerText = 'Unfollow this teacher';
-                            teacher.textContent = 'Unfollow this teacher';
+                            // console.log(response);
+                            if (response.status == 200) {
+                                teacher.setAttribute('data-is-followed', 'yes');
+                                // teacher.innerText = 'Unfollow this teacher';
+                                teacher.textContent = 'Unfollow this teacher';
+                                alert('You followed this teacher successfully.');
+                            }
                         })
                         .catch(function (error) {
                             console.log(error);
