@@ -59,6 +59,13 @@ class HomeController extends Controller
                     ->findMany($student_ids)
                     ->toArray();
             }
+            var_dump([
+                'user' => $user,
+                'token' => $token,
+                'schools' => $schools,
+                'students' => $students,
+            ]);
+            die;
             return view('home', [
                 'user' => $user,
                 'token' => $token,
