@@ -198,8 +198,8 @@
             teacher.onclick = function () {
                 if (is_followed === 'yes') {
                     axiosInstance
-                        .get("student/unfollow_teacher", {
-                            teacher_id: teacher_id,
+                        .get("student/unfollow_teacher?teacher_id=" + teacher_id, {
+                            // teacher_id: teacher_id,
                         })
                         .then(function (response) {
                             console.log(response);
@@ -212,8 +212,8 @@
                         });
                 } else {
                     axiosInstance
-                        .get("student/follow_teacher", {
-                            teacher_id: teacher_id,
+                        .get("student/follow_teacher?teacher_id=" + teacher_id, {
+                            // teacher_id: teacher_id,
                         })
                         .then(function (response) {
                             console.log(response);
