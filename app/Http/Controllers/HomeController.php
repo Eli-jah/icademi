@@ -69,27 +69,24 @@ class HomeController extends Controller
             $user_id = $user->id;
             $user = Student::query()
                 ->with('school.teachers')
-                // ->with('followed_teachers')
                 ->find($user_id);
             $token = $user->createToken('icademi-student')->accessToken;
             $school = $user->school;
-            $teachers = $school->teachers->map(function ($teacher) use ($user_id) {
-                $teacher->is_followed = false;
+            $teachers = $school->teachers->toArray();
+            foreach ($teachers as $key => $teacher) {
+                $teachers[$key]['is_followed'] = false;
                 if (StudentUser::query()
-                    ->where('user_id', $teacher->id)
+                    ->where('user_id', $teacher['id'])
                     ->where('student_id', $user_id)
                     ->exists()) {
-                    $teacher->is_followed = true;
+                    $teachers[$key]['is_followed'] = true;
                 }
-                return $teacher;
-            });
-            // $followed_teachers = $user->followed_teachers;
+            }
             return view('home', [
                 'user' => $user,
                 'token' => $token,
                 'school' => $school,
                 'teachers' => $teachers,
-                // 'followed_teachers' => $followed_teachers,
             ]);
         } else {
             return redirect()->route('login');
