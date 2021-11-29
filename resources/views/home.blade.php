@@ -7,7 +7,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Dashboard</div>
 
-                    <div class="panel-body">
+                    {{--<div class="panel-body">
                         <form class="form-horizontal" method="POST" action="{{ route('logout') }}">
                             {{ csrf_field() }}
                             <div class="form-group">
@@ -18,7 +18,7 @@
                                 </div>
                             </div>
                         </form>
-                    </div>
+                    </div>--}}
 
                     <div class="panel-body">
                         @if (session('status'))
