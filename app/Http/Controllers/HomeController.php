@@ -29,6 +29,7 @@ class HomeController extends Controller
         if (!$user) {
             return redirect()->route('login');
         }
+        dd($user);
         $this->user = $user;
     }
 
