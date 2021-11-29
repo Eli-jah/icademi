@@ -75,7 +75,7 @@ class User extends Authenticatable
     }
 
     /* Eloquent Relationships */
-    public function founded_shools()
+    public function founded_schools()
     {
         return $this->hasMany(School::class, 'user_id', 'id');
     }

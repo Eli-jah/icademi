@@ -51,6 +51,9 @@ Migrated:  2014_10_12_100000_create_password_resets_table
 10. php artisan passport:install
 11. php artisan optimize
 12. composer {list | dumpautoload | dump-autoload}
+13. php artisan cache:table
+14. php artisan session:table
+15. php artisan migrate
 
 ### Common Operations
 
@@ -354,4 +357,12 @@ protected $listen = [
 return Socialite::driver('line')->redirect();
 ```
 
+### Config Cache | Session with Database Driver
 
+```angular2html
+heroku run php artisan cache:table
+heroku run php artisan session:table
+heroku run php artisan migrate
+heroku config:set CACHE_DRIVER=database
+heroku config:set SESSION_DRIVER=database
+```
