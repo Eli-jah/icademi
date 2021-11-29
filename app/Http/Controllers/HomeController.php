@@ -59,7 +59,8 @@ class HomeController extends Controller
                     ->pluck('id')
                     ->toArray();
             }
-            $user->fans_students->each(function ($fans_student) use ($student_ids) {
+            dd($user->fans_students);
+            $user->fans_students->each(function ($fans_student) use (&$student_ids) {
                 if (!in_array($fans_student->id, $student_ids)) {
                     $student_ids[] = $fans_student->id;
                 }
