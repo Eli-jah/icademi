@@ -77,6 +77,19 @@
         <div class="top-right links">
             @auth
                 <a href="{{ url('/home') }}">Home</a>
+
+                <div class="panel-body">
+                    <form class="form-horizontal" method="POST" action="{{ route('logout') }}">
+                        {{ csrf_field() }}
+                        <div class="form-group">
+                            <div class="col-md-8 col-md-offset-4">
+                                <button type="submit" class="btn btn-primary">
+                                    General Logout
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             @else
                 <a href="{{ route('login') }}">General Login</a>
                 <a href="{{ route('register') }}">Register as Teacher</a>

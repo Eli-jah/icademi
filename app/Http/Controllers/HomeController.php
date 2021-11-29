@@ -27,18 +27,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $user = false;
-        $type = false;
         if ($user = Auth::guard()->user()) {
-            $type = 'teacher';
-        } else if ($user = Auth::guard('student-web')->user()) {
-            $type = 'student';
-        }
-        if (!$user) {
-            return redirect()->route('login');
-        }
-        $user_id = $user->id;
-        if ($type == 'teacher') {
+            $user_id = $user->id;
             $user = User::query()
                 ->with('founded_schools')
                 ->with('joined_schools')
@@ -75,7 +65,8 @@ class HomeController extends Controller
                 'schools' => $schools,
                 'students' => $students,
             ]);
-        } else if ($type == 'student') {
+        } else if ($user = Auth::guard('student-web')->user()) {
+            $user_id = $user->id;
             $user = Student::query()
                 ->with('school.teachers')
                 // ->with('followed_teachers')
