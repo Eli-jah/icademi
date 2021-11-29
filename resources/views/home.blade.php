@@ -7,7 +7,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Dashboard</div>
 
-                    {{--<div class="panel-body">
+                    <div class="panel-body">
                         <form class="form-horizontal" method="POST" action="{{ route('logout') }}">
                             {{ csrf_field() }}
                             <div class="form-group">
@@ -18,7 +18,7 @@
                                 </div>
                             </div>
                         </form>
-                    </div>--}}
+                    </div>
 
                     <div class="panel-body">
                         @if (session('status'))
@@ -47,7 +47,7 @@
                                 <h3>Students</h3>
                                 @if (count($students) > 0)
                                     @foreach ($students as $student)
-                                        <p>Student: {{ $student->name }}</p>
+                                        {{--<p>Student: {{ $student->name }}</p>--}}
                                         <a target="_blank" rel="noopener noreferrer"
                                            href="https://icademi-chat.herokuapp.com?ws_token={{ $user->ws_token }}&current_contact_tag=student-{{ $student->id }}">
                                             Chat
