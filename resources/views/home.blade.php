@@ -198,7 +198,7 @@
             teacher.onclick = function () {
                 if (is_followed === 'yes') {
                     axiosInstance
-                        .post("student/unfollow_teacher", {
+                        .get("student/unfollow_teacher", {
                             teacher_id: teacher_id,
                         })
                         .then(function (response) {
@@ -212,7 +212,7 @@
                         });
                 } else {
                     axiosInstance
-                        .post("student/follow_teacher", {
+                        .get("student/follow_teacher", {
                             teacher_id: teacher_id,
                         })
                         .then(function (response) {
