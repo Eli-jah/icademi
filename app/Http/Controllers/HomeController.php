@@ -35,7 +35,7 @@ class HomeController extends Controller
                 ->with('fans_students')
                 ->find($user_id);
             $token = $user->createToken('icademi-teacher')->accessToken;
-            $schools = $user->joined_schools->toArray();
+            $schools = $user->joined_schools;
             $students = [];
             $student_ids = [];
             // $founded_school_ids = [];
@@ -59,13 +59,6 @@ class HomeController extends Controller
                     ->findMany($student_ids)
                     ->toArray();
             }
-            var_dump([
-                'user' => $user,
-                'token' => $token,
-                'schools' => $schools,
-                'students' => $students,
-            ]);
-            die;
             return view('home', [
                 'user' => $user,
                 'token' => $token,

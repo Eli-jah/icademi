@@ -38,7 +38,7 @@
 
                             <div class="row">
                                 <h3>Schools</h3>
-                                @if (count($schools) > 0)
+                                @if ($schools->isNotEmpty())
                                     @foreach ($schools as $school)
                                         <p>School: {{ $school->name }}</p>
                                     @endforeach
@@ -51,9 +51,9 @@
                                 <h3>Students</h3>
                                 @if (count($students) > 0)
                                     @foreach ($students as $student)
-                                        <p>Student: {{ $student->name }}</p>
+                                        <p>Student: {{ $student['name'] }}</p>
                                         <a target="_blank" rel="noopener noreferrer"
-                                           href="https://icademi-chat.herokuapp.com?ws_token={{ $user->ws_token }}&current_contact_tag=student-{{ $student->id }}">
+                                           href="https://icademi-chat.herokuapp.com?ws_token={{ $user->ws_token }}&current_contact_tag=student-{{ $student['id'] }}">
                                             Chat
                                         </a>
                                     @endforeach
