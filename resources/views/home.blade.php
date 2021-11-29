@@ -118,7 +118,7 @@
                     Authorization: 'Bearer ' + token,
                 },
             });
-            teachers.forEach(teacher => {
+            for (let teacher in teachers) {
                 let teacher_id = teacher.getAttribute('data-teacher-id');
                 let is_followed = teacher.getAttribute('data-is-followed');
                 teacher.onclick = function () {
@@ -146,7 +146,7 @@
                             });
                     }
                 }
-            });
+            }
         })();
     </script>
 @endsection
