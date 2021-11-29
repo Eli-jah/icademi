@@ -90,7 +90,7 @@
                                         </a>
                                         &nbsp;&nbsp;&nbsp;&nbsp;
                                         <a target="_blank" rel="noopener noreferrer"
-                                           href="https://icademi-chat.herokuapp.com?ws_token={{ $user->ws_token }}&current_contact_tag=teacher-{{ $teacher->id }}">
+                                           href="https://icademi-chat.herokuapp.com?ws_token={{ $user->ws_token }}&current_contact_tag=teacher-{{ $teacher['id'] }}">
                                             Chat with this teacher
                                         </a>
                                     </p>
