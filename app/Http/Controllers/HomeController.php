@@ -29,7 +29,6 @@ class HomeController extends Controller
         if (!$user) {
             return redirect()->route('login');
         }
-        dd($user);
         $this->user = $user;
     }
 
@@ -40,6 +39,16 @@ class HomeController extends Controller
      */
     public function index()
     {
+        if ($user = Auth::guard()->user()) {
+            $this->type = 'teacher';
+        } else if ($user = Auth::guard('student-web')->user()) {
+            $this->type = 'student';
+        }
+        if (!$user) {
+            return redirect()->route('login');
+        }
+        $this->user = $user;
+        dd($user);
         $user_id = $this->user->id;
         if ($this->type == 'teacher') {
             $user = User::query()

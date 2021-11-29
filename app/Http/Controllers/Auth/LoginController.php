@@ -8,6 +8,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -82,13 +83,13 @@ class LoginController extends Controller
      */
     protected function attemptLogin(Request $request)
     {
-        $user_attempt_login = $this->guard()->attempt(
+        $user_attempt_login = Auth::guard()->attempt(
             $this->credentials($request), $request->filled('remember')
         );
         if ($user_attempt_login) {
             return $user_attempt_login;
         }
-        return $this->guard('student-web')->attempt(
+        return Auth::guard('student-web')->attempt(
             $this->credentials($request), $request->filled('remember')
         );
     }
