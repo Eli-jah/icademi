@@ -53,7 +53,8 @@ class LineController extends Controller
 
         Auth::guard('web')->login($line_user);
 
-        return view('qr_code')
-            ->with('line_id', $line_id);
+        // return view('qr_code')
+        //     ->with('line_id', $line_id);
+        return redirect()->route('home');
     }
 }

@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Register</div>
+                    <div class="panel-heading">Register as Teacher</div>
 
                     <div class="panel-body">
                         <form class="form-horizontal" method="POST" action="{{ route('register') }}">
@@ -67,7 +67,7 @@
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">
-                                        Register
+                                        Register as Teacher
                                     </button>
                                 </div>
                             </div>
@@ -76,7 +76,7 @@
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <a href="{{ route('line.login') }}" class="btn btn-primary btn-block">
-                                        Login via LINE
+                                        Teacher Login via LINE
                                     </a>
                                 </div>
                             </div>

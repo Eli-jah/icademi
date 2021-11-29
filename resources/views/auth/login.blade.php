@@ -54,7 +54,7 @@
                             <div class="form-group">
                                 <div class="col-md-8 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">
-                                        Login
+                                        General Login
                                     </button>
 
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
@@ -67,7 +67,7 @@
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <a href="{{ route('line.login') }}" class="btn btn-primary btn-block">
-                                        Login via LINE
+                                        Teacher Login via LINE
                                     </a>
                                 </div>
                             </div>
